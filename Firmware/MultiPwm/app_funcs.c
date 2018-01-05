@@ -528,12 +528,17 @@ bool app_write_REG_TRG3_MASK(void *a)
 /************************************************************************/
 /* REG_START_PWM                                                        */
 /************************************************************************/
-void app_read_REG_START_PWM(void) {}
+void app_read_REG_START_PWM(void)
+{
+    app_regs.REG_START_PWM = 0;
+}
+
 bool app_write_REG_START_PWM(void *a)
 {
     if (*((uint8_t*)a) & ~(B_START_TRG0 | B_START_TRG1 | B_START_TRG2 | B_START_TRG3))
         return false;
     
+    app_regs.REG_START_PWM = *((uint8_t*)a);
     check_and_start_pwms(*((uint8_t*)a));
 	return true;
 }
@@ -542,14 +547,19 @@ bool app_write_REG_START_PWM(void *a)
 /************************************************************************/
 /* REG_STOP_PWM                                                         */
 /************************************************************************/
-void app_read_REG_STOP_PWM(void) {}
+void app_read_REG_STOP_PWM(void)
+{
+    app_regs.REG_STOP_PWM = 0;
+}
+
 bool app_write_REG_STOP_PWM(void *a)
 {
     if (*((uint8_t*)a) & ~(B_STOP_TRG0 | B_STOP_TRG1 | B_STOP_TRG2 | B_STOP_TRG3))
         return false;
     
+    app_regs.REG_STOP_PWM = *((uint8_t*)a);
     check_and_stop_pwms(*((uint8_t*)a));
-	return true;
+    return true;
 }
 
 
