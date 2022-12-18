@@ -2,7 +2,7 @@
 
 This board provides 4 independent PWM outputs that can be triggered by four different input triggers or all at the same time. Also four output synchronization signals are available. The PWM signal generation is configured in software.
 
-![MultiPWMGenerator](./docs/assets/pwmGenerator.png)
+![harpmultipwmgenerator](./docs/assets/pcb.png)
 
 ### Key Features ###
 
