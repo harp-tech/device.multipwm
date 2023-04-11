@@ -22,6 +22,7 @@ This board provides 4 independent PWM outputs that can be triggered by four diff
 * 5x Digital input triggers: CH0 to CH3, ALL [BNC]
 * 4x Digital output PWM signals: CH0 to CH3 [BNC]
 * 5x Digital output sync signals: CH0 to CH3, ALL [BNC]
+
 ## Interface ##
 
 The interface with the Harp board can be done through [Bonsai](https://bonsai-rx.org/) or a dedicated GUI (Graphical User Interface).
