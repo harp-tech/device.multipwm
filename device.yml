@@ -1,0 +1,266 @@
+%YAML 1.1
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/harp-tech/reflex-generator/main/schema/device.json
+device: MultiPwm
+whoAmI: 1040
+firmwareVersion: "1.0"
+hardwareTargets: "1.1"
+registers:
+  PwmChannel0Frequency: &pwmfreq
+    address: 32
+    type: Float
+    access: Write
+    description: Frequency (Hz) of PWM pulses in channel 0.
+  PwmChannel1Frequency:
+    <<: *pwmfreq
+    address: 33
+    description: Frequency (Hz) of PWM pulses in channel 1.
+  PwmChannel2Frequency:
+    <<: *pwmfreq
+    address: 34
+    description: Frequency (Hz) of PWM pulses in channel 2.
+  PwmChannel3Frequency:
+    <<: *pwmfreq
+    address: 35
+    description: Frequency (Hz) of PWM pulses in channel 3.
+  PwmChannel0DutyCycle: &pwmduty
+    address: 36
+    minValue: 0
+    maxValue: 100
+    defaultValue: 50
+    type: Float
+    access: Write
+    description: Duty cycle (0-100) of PWM pulses in channel 0.
+  PwmChannel1DutyCycle:
+    <<: *pwmduty
+    address: 37
+    description: Duty cycle (0-100) of PWM pulses in channel 1.
+  PwmChannel2DutyCycle:
+    <<: *pwmduty
+    address: 38
+    description: Duty cycle (0-100) of PWM pulses in channel 2.
+  PwmChannel3DutyCycle:
+    <<: *pwmduty
+    address: 39
+    description: Duty cycle (0-100) of PWM pulses in channel 3.
+  PwmChannel0NumPulses: &pwmnum
+    address: 40
+    type: U32
+    access: Write
+    description: Total number of pulses to be generated in channel 0.
+  PwmChannel1NumPulses:
+    <<: *pwmnum
+    address: 41
+    description: Total number of pulses to be generated in channel 1.
+  PwmChannel2NumPulses:
+    <<: *pwmnum
+    address: 42
+    description: Total number of pulses to be generated in channel 2.
+  PwmChannel3NumPulses:
+    <<: *pwmnum
+    address: 43
+    description: Total number of pulses to be generated in channel 3.
+  PwmChannel0RealFrequency: &pwmfreqreal
+    address: 44
+    type: Float
+    access: Write
+    description: Real frequency (Hz) of PWM pulses in channel 0.
+  PwmChannel1RealFrequency:
+    <<: *pwmfreqreal
+    address: 45
+    description: Real frequency (Hz) of PWM pulses in channel 1.
+  PwmChannel2RealFrequency:
+    <<: *pwmfreqreal
+    address: 46
+    description: Real frequency (Hz) of PWM pulses in channel 2.
+  PwmChannel3RealFrequency:
+    <<: *pwmfreqreal
+    address: 47
+    description: Real frequency (Hz) of PWM pulses in channel 3.
+  PwmChannel0RealDutyCycle: &pwmdutyreal
+    address: 48
+    minValue: 0
+    maxValue: 100
+    defaultValue: 50
+    type: Float
+    access: Write
+    description: Real duty cycle (0-100) of PWM pulses in channel 0.
+  PwmChannel1RealDutyCycle:
+    <<: *pwmdutyreal
+    address: 49
+    description: Real duty cycle (0-100) of PWM pulses in channel 1.
+  PwmChannel2RealDutyCycle:
+    <<: *pwmdutyreal
+    address: 50
+    description: Real duty cycle (0-100) of PWM pulses in channel 2.
+  PwmChannel3RealDutyCycle:
+    <<: *pwmdutyreal
+    address: 51
+    description: Real duty cycle (0-100) of PWM pulses in channel 3.
+  PwmChannel0PlaybackMode: &pwmplayback
+    address: 52
+    type: U8
+    access: Write
+    maskType: PwmPlaybackMode
+    description: Playback mode of channel 0.
+  PwmChannel1PlaybackMode:
+    <<: *pwmplayback
+    address: 53
+    description: Playback mode of channel 1.
+  PwmChannel2PlaybackMode:
+    <<: *pwmplayback
+    address: 54
+    description: Playback mode of channel 2.
+  PwmChannel3PlaybackMode:
+    <<: *pwmplayback
+    address: 55
+    description: Playback mode of channel 3.
+  Trigger0Targets: &pwmtrigger
+    address: 56
+    type: U8
+    access: Write
+    maskType: PwmOutput
+    description: Target channels that will start the PWM sequence if Trigger0 is activated.
+  Trigger1Targets:
+    <<: *pwmtrigger
+    address: 57
+    description: Target channels that will start the PWM sequence if Trigger1 is activated.
+  Trigger2Targets:
+    <<: *pwmtrigger
+    address: 58
+    description: Target channels that will start the PWM sequence if Trigger2 is activated.
+  Trigger3Targets:
+    <<: *pwmtrigger
+    address: 59
+    description: Target channels that will start the PWM sequence if Trigger3 is activated.
+  ArmTrigger: &armtrigger #TODO UNCLEAR
+    address: 60
+    type: U8
+    access: Write
+    maskType: TriggerInput
+    description: Arms the trigger channels specified in the mask.
+  DisarmTrigger: #TODO UNCLEAR
+    <<: *armtrigger
+    address: 61
+    maskType: TriggerInput
+    description: Disarms the trigger channels specified in the mask.
+  Reserved0: &reserved #TODO mismatch between firmware and xls
+    address: 62
+    type: U8
+    access: Read
+    visibility: private
+    description: Reserved for future use.
+  Reserved1:
+    <<: *reserved
+    address: 63
+    description: Reserved for future use.
+  Trigger0Mode: &triggermode
+    address: 64
+    type: U8
+    access: Write
+    maskType: TriggerMode
+    description: Trigger mode of input channel 0.
+  Trigger1Mode:
+    <<: *triggermode
+    address: 65
+    description: Trigger mode of input channel 1.
+  Trigger2Mode:
+    <<: *triggermode
+    address: 66
+    description: Trigger mode of input channel 2.
+  Trigger3Mode:
+    <<: *triggermode
+    address: 67
+    description: Trigger mode of input channel 3.
+  RequestEnable: #TODO UNCLEAR
+    address: 68
+    type: U8
+    access: Write
+    maskType: PwmOutput
+    description: Requests enable to stimulate.
+  ChannelEnable: #TODO UNCLEAR
+    address: 69
+    type: U8
+    access: Write
+    maskType: EnableMask
+    description: Enable enable
+  TriggerAllMode:
+    address: 70
+    type: U8
+    access: Write
+    maskType: TriggerAllConfig
+    description: Trigger mode of "All" channel.
+  TriggerChannelState:
+    address: 71
+    type: U8
+    access: Read
+    maskType: TriggerInput
+    description: Current state of all trigger channel inputs.
+  PwmChannelState:
+    address: 72
+    type: U8
+    access: Read
+    maskType: PwmOutput
+    description: Current state of all PWM channel outputs.
+  PwmExecutionState:
+    address: 73
+    type: U8
+    access: Read
+    maskType: PwmOutput
+    description: Current state of the PWM execution.
+  EnableEvents:
+    address: 74
+    type: U8
+    access: Write
+    maskType: MultiPwmEvents
+    description: Enables the generation of events.
+bitMasks:
+  PwmOutput:
+    description: Available PWM output channels.
+    bits:
+      Channel0: 0x00
+      Channel1: 0x01
+      Channel2: 0x02
+      Channel3: 0x04
+  TriggerInput:
+    description: Available trigger input channels.
+    bits:
+      Channel0: 0x00
+      Channel1: 0x01
+      Channel2: 0x02
+      Channel3: 0x04
+  EnableMask: #TODO UNCLEAR
+    description: TODO
+    bits:
+      EN0: 0x01
+      EN1: 0x02
+      EN2: 0x04
+      EN3: 0x08
+      SGLE0: 0x10
+      SGLE1: 0x20
+      SGLE2: 0x40
+      SGLE3: 0x80
+  MultiPwmEvents:
+    description: Available events that can be enabled/disabled.
+    bits:
+      Execution: 0x01
+groupMasks:
+  PlaybackMode:
+    description: Available playback modes of the PWM channel.
+    values:
+      Count: 0
+      Infinite: 1
+  TriggerMode:
+    description: Available operation modes for trigger input channels.
+    values:
+      Start: 0
+      StartAndStop: 1
+      NoTrigger: 8 #TODO Is this correct?
+  TriggerAllConfig: #TODO UNCLEAR
+    description: Available operation modes for "All" trigger input channel.
+    values:
+      Start: 0
+      StartAndStop: 1
+      Enable: 2
+      EnableAndStop: 3
+      NoTrigger: 8 #TODO is This correct?
