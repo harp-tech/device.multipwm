@@ -130,14 +130,14 @@ registers:
     <<: *pwmtrigger
     address: 59
     description: Target channels that will start the PWM sequence if Trigger3 is activated.
-  ArmTrigger: &armtrigger #TODO UNCLEAR
+  StartSoftwareTrigger: &softtrigger
     address: 60
     type: U8
     access: Write
     maskType: TriggerInput
     description: Arms the trigger channels specified in the mask.
-  DisarmTrigger: #TODO UNCLEAR
-    <<: *armtrigger
+  StopSoftwareTrigger:
+    <<: *softtrigger
     address: 61
     maskType: TriggerInput
     description: Disarms the trigger channels specified in the mask.
