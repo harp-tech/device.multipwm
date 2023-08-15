@@ -25,8 +25,8 @@ registers:
     description: Frequency (Hz) of PWM pulses in channel 3.
   PwmChannel0DutyCycle: &pwmduty
     address: 36
-    minValue: 0
-    maxValue: 100
+    minValue: 0.1
+    maxValue: 99.9
     defaultValue: 50
     type: Float
     access: Write
