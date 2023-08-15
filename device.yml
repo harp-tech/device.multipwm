@@ -79,11 +79,8 @@ registers:
     description: Real frequency (Hz) of PWM pulses in channel 3.
   PwmChannel0RealDutyCycle: &pwmdutyreal
     address: 48
-    minValue: 0
-    maxValue: 100
-    defaultValue: 50
     type: Float
-    access: Write
+    access: Read
     description: Real duty cycle (0-100) of PWM pulses in channel 0.
   PwmChannel1RealDutyCycle:
     <<: *pwmdutyreal
