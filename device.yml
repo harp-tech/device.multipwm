@@ -116,7 +116,7 @@ registers:
     address: 56
     type: U8
     access: Write
-    maskType: PwmOutput
+    maskType: PwmChannels
     description: Target channels that will start the PWM sequence if Trigger0 is activated.
   Trigger1Targets:
     <<: *pwmtrigger
@@ -135,21 +135,23 @@ registers:
     type: U8
     access: Write
     maskType: TriggerInput
-    description: Arms the trigger channels specified in the mask.
+    description: Emits a start software-trigger on the channels specified in the mask.
   StopSoftwareTrigger:
     <<: *softtrigger
     address: 61
     maskType: TriggerInput
-    description: Disarms the trigger channels specified in the mask.
-  Reserved0: &reserved #TODO mismatch between firmware and xls
+    description: Emits a stop software-trigger on the channels specified in the mask.
+  ArmPwmChannels:
     address: 62
+    type: U8
+    access: Write
+    maskType: PwmChannels
+    description: Arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.
+  Reserved0: &reserved
+    address: 63
     type: U8
     access: Read
     visibility: private
-    description: Reserved for future use.
-  Reserved1:
-    <<: *reserved
-    address: 63
     description: Reserved for future use.
   Trigger0Mode: &triggermode
     address: 64
@@ -173,13 +175,13 @@ registers:
     address: 68
     type: U8
     access: Write
-    maskType: PwmOutput
+    maskType: PwmChannels
     description: Requests enable to stimulate.
-  ChannelEnable: #TODO UNCLEAR
+  EnablePwmChannels:
     address: 69
     type: U8
     access: Write
-    maskType: EnableMask
+    maskType: PwmChannels
     description: Enable enable
   TriggerAllMode:
     address: 70
@@ -197,13 +199,13 @@ registers:
     address: 72
     type: U8
     access: Read
-    maskType: PwmOutput
+    maskType: PwmChannels
     description: Current state of all PWM channel outputs.
   PwmExecutionState:
     address: 73
     type: U8
-    access: Read
-    maskType: PwmOutput
+    access: Event
+    maskType: PwmChannels
     description: Current state of the PWM execution.
   EnableEvents:
     address: 74
@@ -212,7 +214,7 @@ registers:
     maskType: MultiPwmEvents
     description: Enables the generation of events.
 bitMasks:
-  PwmOutput:
+  PwmChannels:
     description: Available PWM output channels.
     bits:
       Channel0: 0x00
@@ -226,17 +228,6 @@ bitMasks:
       Channel1: 0x01
       Channel2: 0x02
       Channel3: 0x04
-  EnableMask: #TODO UNCLEAR
-    description: TODO
-    bits:
-      EN0: 0x01
-      EN1: 0x02
-      EN2: 0x04
-      EN3: 0x08
-      SGLE0: 0x10
-      SGLE1: 0x20
-      SGLE2: 0x40
-      SGLE3: 0x80
   MultiPwmEvents:
     description: Available events that can be enabled/disabled.
     bits:
@@ -253,7 +244,7 @@ groupMasks:
       Start: 0
       StartAndStop: 1
       NoTrigger: 8 #TODO Is this correct?
-  TriggerAllConfig: #TODO UNCLEAR
+  TriggerAllConfig:
     description: Available operation modes for "All" trigger input channel.
     values:
       Start: 0
