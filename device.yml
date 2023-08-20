@@ -180,12 +180,12 @@ registers:
     <<: *triggermode
     address: 67
     description: Trigger mode of input channel 3.
-  RequestEnable: #TODO UNCLEAR
+  RequestEnable:
     address: 68
     type: U8
     access: Write
     maskType: PwmChannels
-    description: Requests enable to stimulate.
+    description: If set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
   EnablePwmChannels:
     address: 69
     type: U8
