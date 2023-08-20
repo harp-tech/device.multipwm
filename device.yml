@@ -157,7 +157,16 @@ registers:
     address: 64
     type: U8
     access: Write
-    maskType: TriggerMode
+    payloadSpec:
+      TriggerMode:
+        maskType: TriggerModeConfig
+        description: Specifies the trigger mode.
+        mask: 0x03
+      Polarity:
+        maskType: TriggerPolarity
+        description: Specifies the polarity of the trigger signal.
+        mask: 0x10
+    maskType: TriggerModeConfig
     description: Trigger mode of input channel 0.
   Trigger1Mode:
     <<: *triggermode
@@ -187,8 +196,16 @@ registers:
     address: 70
     type: U8
     access: Write
-    maskType: TriggerAllConfig
-    description: Trigger mode of "All" channel.
+    payloadSpec:
+      TriggerMode:
+        maskType: TriggerAllModeConfig
+        description: Specifies the trigger mode.
+        mask: 0x03
+      Polarity:
+        maskType: TriggerPolarity
+        description: Specifies the polarity of the trigger signal.
+        mask: 0x10
+    description: When triggered, all channels will be affected by the event.
   TriggerChannelState:
     address: 71
     type: U8
@@ -238,17 +255,20 @@ groupMasks:
     values:
       Count: 0
       Infinite: 1
-  TriggerMode:
+  TriggerModeConfig:
     description: Available operation modes for trigger input channels.
     values:
       Start: 0
       StartAndStop: 1
-      NoTrigger: 8 #TODO Is this correct?
-  TriggerAllConfig:
+  TriggerPolarity:
+    description: Available polarity options for a trigger mode.
+    values:
+      Default: 0
+      Inverted: 8
+  TriggerAllModeConfig:
     description: Available operation modes for "All" trigger input channel.
     values:
       Start: 0
       StartAndStop: 1
       Enable: 2
       EnableAndStop: 3
-      NoTrigger: 8 #TODO is This correct?
