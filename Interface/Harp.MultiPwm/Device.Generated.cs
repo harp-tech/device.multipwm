@@ -3894,9 +3894,9 @@ namespace Harp.MultiPwm
     }
 
     /// <summary>
-    /// Represents a register that requests enable to stimulate.
+    /// Represents a register that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
     /// </summary>
-    [Description("Requests enable to stimulate.")]
+    [Description("If set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.")]
     public partial class RequestEnable
     {
         /// <summary>
@@ -6428,22 +6428,22 @@ namespace Harp.MultiPwm
 
     /// <summary>
     /// Represents an operator that creates a sequence of message payloads
-    /// that requests enable to stimulate.
+    /// that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
     /// </summary>
     [DisplayName("RequestEnablePayload")]
     [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that requests enable to stimulate.")]
+    [Description("Creates a sequence of message payloads that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.")]
     public partial class CreateRequestEnablePayload : HarpCombinator
     {
         /// <summary>
-        /// Gets or sets the value that requests enable to stimulate.
+        /// Gets or sets the value that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
         /// </summary>
-        [Description("The value that requests enable to stimulate.")]
+        [Description("The value that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.")]
         public PwmChannels Value { get; set; }
 
         /// <summary>
         /// Creates an observable sequence that contains a single message
-        /// that requests enable to stimulate.
+        /// that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
         /// </summary>
         /// <returns>
         /// A sequence containing a single <see cref="HarpMessage"/> object
@@ -6456,7 +6456,7 @@ namespace Harp.MultiPwm
 
         /// <summary>
         /// Creates an observable sequence of message payloads
-        /// that requests enable to stimulate.
+        /// that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
         /// </summary>
         /// <typeparam name="TSource">
         /// The type of the elements in the <paramref name="source"/> sequence.
