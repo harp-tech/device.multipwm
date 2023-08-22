@@ -166,7 +166,6 @@ registers:
         maskType: TriggerPolarity
         description: Specifies the polarity of the trigger signal.
         mask: 0x10
-    maskType: TriggerModeConfig
     description: Trigger mode of input channel 0.
   Trigger1Mode:
     <<: *triggermode
