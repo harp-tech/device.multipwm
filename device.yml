@@ -217,12 +217,12 @@ registers:
     access: Read
     maskType: PwmChannels
     description: Current state of all PWM channel outputs.
-  PwmExecutionState:
+  PwmState:
     address: 73
     type: U8
     access: Event
     maskType: PwmChannels
-    description: Current state of the PWM execution.
+    description: The state of the PWM for each channel. Emits an event each time a PMW starts or stops.
   EnableEvents:
     address: 74
     type: U8
