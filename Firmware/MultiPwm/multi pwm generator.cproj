@@ -138,7 +138,7 @@
   </avrgcc.linker.libraries.Libraries>
   <avrgcc.linker.libraries.LibrarySearchPaths>
     <ListValues>
-      <Value>C:\Users\Artur\Documents\GitHub\device.multipwm\Firmware\MultiPwm</Value>
+      <Value>..</Value>
     </ListValues>
   </avrgcc.linker.libraries.LibrarySearchPaths>
   <avrgcc.assembler.general.IncludePaths>
