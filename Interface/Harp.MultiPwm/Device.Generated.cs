@@ -77,7 +77,7 @@ namespace Harp.MultiPwm
             { 70, typeof(TriggerAllMode) },
             { 71, typeof(TriggerChannelState) },
             { 72, typeof(PwmChannelState) },
-            { 73, typeof(PwmExecutionState) },
+            { 73, typeof(PwmState) },
             { 74, typeof(EnableEvents) }
         };
     }
@@ -147,7 +147,7 @@ namespace Harp.MultiPwm
     /// <seealso cref="TriggerAllMode"/>
     /// <seealso cref="TriggerChannelState"/>
     /// <seealso cref="PwmChannelState"/>
-    /// <seealso cref="PwmExecutionState"/>
+    /// <seealso cref="PwmState"/>
     /// <seealso cref="EnableEvents"/>
     [XmlInclude(typeof(PwmChannel0Frequency))]
     [XmlInclude(typeof(PwmChannel1Frequency))]
@@ -189,15 +189,15 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(TriggerAllMode))]
     [XmlInclude(typeof(TriggerChannelState))]
     [XmlInclude(typeof(PwmChannelState))]
-    [XmlInclude(typeof(PwmExecutionState))]
+    [XmlInclude(typeof(PwmState))]
     [XmlInclude(typeof(EnableEvents))]
     [Description("Filters register-specific messages reported by the MultiPwm device.")]
-    public class FilterMessage : FilterMessageBuilder, INamedElement
+    public class FilterRegister : FilterRegisterBuilder, INamedElement
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FilterMessage"/> class.
+        /// Initializes a new instance of the <see cref="FilterRegister"/> class.
         /// </summary>
-        public FilterMessage()
+        public FilterRegister()
         {
             Register = new PwmChannel0Frequency();
         }
@@ -252,7 +252,7 @@ namespace Harp.MultiPwm
     /// <seealso cref="TriggerAllMode"/>
     /// <seealso cref="TriggerChannelState"/>
     /// <seealso cref="PwmChannelState"/>
-    /// <seealso cref="PwmExecutionState"/>
+    /// <seealso cref="PwmState"/>
     /// <seealso cref="EnableEvents"/>
     [XmlInclude(typeof(PwmChannel0Frequency))]
     [XmlInclude(typeof(PwmChannel1Frequency))]
@@ -294,7 +294,7 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(TriggerAllMode))]
     [XmlInclude(typeof(TriggerChannelState))]
     [XmlInclude(typeof(PwmChannelState))]
-    [XmlInclude(typeof(PwmExecutionState))]
+    [XmlInclude(typeof(PwmState))]
     [XmlInclude(typeof(EnableEvents))]
     [XmlInclude(typeof(TimestampedPwmChannel0Frequency))]
     [XmlInclude(typeof(TimestampedPwmChannel1Frequency))]
@@ -336,7 +336,7 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(TimestampedTriggerAllMode))]
     [XmlInclude(typeof(TimestampedTriggerChannelState))]
     [XmlInclude(typeof(TimestampedPwmChannelState))]
-    [XmlInclude(typeof(TimestampedPwmExecutionState))]
+    [XmlInclude(typeof(TimestampedPwmState))]
     [XmlInclude(typeof(TimestampedEnableEvents))]
     [Description("Filters and selects specific messages reported by the MultiPwm device.")]
     public partial class Parse : ParseBuilder, INamedElement
@@ -396,7 +396,7 @@ namespace Harp.MultiPwm
     /// <seealso cref="TriggerAllMode"/>
     /// <seealso cref="TriggerChannelState"/>
     /// <seealso cref="PwmChannelState"/>
-    /// <seealso cref="PwmExecutionState"/>
+    /// <seealso cref="PwmState"/>
     /// <seealso cref="EnableEvents"/>
     [XmlInclude(typeof(PwmChannel0Frequency))]
     [XmlInclude(typeof(PwmChannel1Frequency))]
@@ -438,7 +438,7 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(TriggerAllMode))]
     [XmlInclude(typeof(TriggerChannelState))]
     [XmlInclude(typeof(PwmChannelState))]
-    [XmlInclude(typeof(PwmExecutionState))]
+    [XmlInclude(typeof(PwmState))]
     [XmlInclude(typeof(EnableEvents))]
     [Description("Formats a sequence of values as specific MultiPwm register messages.")]
     public partial class Format : FormatBuilder, INamedElement
@@ -2400,9 +2400,9 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PwmPlaybackMode GetPayload(HarpMessage message)
+        public static PlaybackMode GetPayload(HarpMessage message)
         {
-            return (PwmPlaybackMode)message.GetPayloadByte();
+            return (PlaybackMode)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -2410,10 +2410,10 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PwmPlaybackMode> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PlaybackMode> GetTimestampedPayload(HarpMessage message)
         {
             var payload = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PwmPlaybackMode)payload.Value, payload.Seconds);
+            return Timestamped.Create((PlaybackMode)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -2425,7 +2425,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel0PlaybackMode"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PwmPlaybackMode value)
+        public static HarpMessage FromPayload(MessageType messageType, PlaybackMode value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -2441,7 +2441,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel0PlaybackMode"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PwmPlaybackMode value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PlaybackMode value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -2465,7 +2465,7 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PwmPlaybackMode> GetPayload(HarpMessage message)
+        public static Timestamped<PlaybackMode> GetPayload(HarpMessage message)
         {
             return PwmChannel0PlaybackMode.GetTimestampedPayload(message);
         }
@@ -2497,9 +2497,9 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PwmPlaybackMode GetPayload(HarpMessage message)
+        public static PlaybackMode GetPayload(HarpMessage message)
         {
-            return (PwmPlaybackMode)message.GetPayloadByte();
+            return (PlaybackMode)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -2507,10 +2507,10 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PwmPlaybackMode> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PlaybackMode> GetTimestampedPayload(HarpMessage message)
         {
             var payload = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PwmPlaybackMode)payload.Value, payload.Seconds);
+            return Timestamped.Create((PlaybackMode)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -2522,7 +2522,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel1PlaybackMode"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PwmPlaybackMode value)
+        public static HarpMessage FromPayload(MessageType messageType, PlaybackMode value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -2538,7 +2538,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel1PlaybackMode"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PwmPlaybackMode value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PlaybackMode value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -2562,7 +2562,7 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PwmPlaybackMode> GetPayload(HarpMessage message)
+        public static Timestamped<PlaybackMode> GetPayload(HarpMessage message)
         {
             return PwmChannel1PlaybackMode.GetTimestampedPayload(message);
         }
@@ -2594,9 +2594,9 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PwmPlaybackMode GetPayload(HarpMessage message)
+        public static PlaybackMode GetPayload(HarpMessage message)
         {
-            return (PwmPlaybackMode)message.GetPayloadByte();
+            return (PlaybackMode)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -2604,10 +2604,10 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PwmPlaybackMode> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PlaybackMode> GetTimestampedPayload(HarpMessage message)
         {
             var payload = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PwmPlaybackMode)payload.Value, payload.Seconds);
+            return Timestamped.Create((PlaybackMode)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -2619,7 +2619,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel2PlaybackMode"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PwmPlaybackMode value)
+        public static HarpMessage FromPayload(MessageType messageType, PlaybackMode value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -2635,7 +2635,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel2PlaybackMode"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PwmPlaybackMode value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PlaybackMode value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -2659,7 +2659,7 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PwmPlaybackMode> GetPayload(HarpMessage message)
+        public static Timestamped<PlaybackMode> GetPayload(HarpMessage message)
         {
             return PwmChannel2PlaybackMode.GetTimestampedPayload(message);
         }
@@ -2691,9 +2691,9 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static PwmPlaybackMode GetPayload(HarpMessage message)
+        public static PlaybackMode GetPayload(HarpMessage message)
         {
-            return (PwmPlaybackMode)message.GetPayloadByte();
+            return (PlaybackMode)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -2701,10 +2701,10 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PwmPlaybackMode> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<PlaybackMode> GetTimestampedPayload(HarpMessage message)
         {
             var payload = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((PwmPlaybackMode)payload.Value, payload.Seconds);
+            return Timestamped.Create((PlaybackMode)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -2716,7 +2716,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel3PlaybackMode"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, PwmPlaybackMode value)
+        public static HarpMessage FromPayload(MessageType messageType, PlaybackMode value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -2732,7 +2732,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel3PlaybackMode"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PwmPlaybackMode value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, PlaybackMode value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -2756,7 +2756,7 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<PwmPlaybackMode> GetPayload(HarpMessage message)
+        public static Timestamped<PlaybackMode> GetPayload(HarpMessage message)
         {
             return PwmChannel3PlaybackMode.GetTimestampedPayload(message);
         }
@@ -4395,28 +4395,28 @@ namespace Harp.MultiPwm
     }
 
     /// <summary>
-    /// Represents a register that current state of the PWM execution.
+    /// Represents a register that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.
     /// </summary>
-    [Description("Current state of the PWM execution.")]
-    public partial class PwmExecutionState
+    [Description("The state of the PWM for each channel. Emits an event each time a PMW starts or stops.")]
+    public partial class PwmState
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmExecutionState"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmState"/> register. This field is constant.
         /// </summary>
         public const int Address = 73;
 
         /// <summary>
-        /// Represents the payload type of the <see cref="PwmExecutionState"/> register. This field is constant.
+        /// Represents the payload type of the <see cref="PwmState"/> register. This field is constant.
         /// </summary>
         public const PayloadType RegisterType = PayloadType.U8;
 
         /// <summary>
-        /// Represents the length of the <see cref="PwmExecutionState"/> register. This field is constant.
+        /// Represents the length of the <see cref="PwmState"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
 
         /// <summary>
-        /// Returns the payload data for <see cref="PwmExecutionState"/> register messages.
+        /// Returns the payload data for <see cref="PwmState"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
@@ -4426,7 +4426,7 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns the timestamped payload data for <see cref="PwmExecutionState"/> register messages.
+        /// Returns the timestamped payload data for <see cref="PwmState"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
@@ -4437,12 +4437,12 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a Harp message for the <see cref="PwmExecutionState"/> register.
+        /// Returns a Harp message for the <see cref="PwmState"/> register.
         /// </summary>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmExecutionState"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmState"/> register
         /// with the specified message type and payload.
         /// </returns>
         public static HarpMessage FromPayload(MessageType messageType, PwmChannels value)
@@ -4451,14 +4451,14 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a timestamped Harp message for the <see cref="PwmExecutionState"/>
+        /// Returns a timestamped Harp message for the <see cref="PwmState"/>
         /// register.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmExecutionState"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmState"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
         public static HarpMessage FromPayload(double timestamp, MessageType messageType, PwmChannels value)
@@ -4469,25 +4469,25 @@ namespace Harp.MultiPwm
 
     /// <summary>
     /// Provides methods for manipulating timestamped messages from the
-    /// PwmExecutionState register.
+    /// PwmState register.
     /// </summary>
-    /// <seealso cref="PwmExecutionState"/>
-    [Description("Filters and selects timestamped messages from the PwmExecutionState register.")]
-    public partial class TimestampedPwmExecutionState
+    /// <seealso cref="PwmState"/>
+    [Description("Filters and selects timestamped messages from the PwmState register.")]
+    public partial class TimestampedPwmState
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmExecutionState"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmState"/> register. This field is constant.
         /// </summary>
-        public const int Address = PwmExecutionState.Address;
+        public const int Address = PwmState.Address;
 
         /// <summary>
-        /// Returns timestamped payload data for <see cref="PwmExecutionState"/> register messages.
+        /// Returns timestamped payload data for <see cref="PwmState"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
         public static Timestamped<PwmChannels> GetPayload(HarpMessage message)
         {
-            return PwmExecutionState.GetTimestampedPayload(message);
+            return PwmState.GetTimestampedPayload(message);
         }
     }
 
@@ -4632,7 +4632,7 @@ namespace Harp.MultiPwm
     /// <seealso cref="CreateTriggerAllModePayload"/>
     /// <seealso cref="CreateTriggerChannelStatePayload"/>
     /// <seealso cref="CreatePwmChannelStatePayload"/>
-    /// <seealso cref="CreatePwmExecutionStatePayload"/>
+    /// <seealso cref="CreatePwmStatePayload"/>
     /// <seealso cref="CreateEnableEventsPayload"/>
     [XmlInclude(typeof(CreatePwmChannel0FrequencyPayload))]
     [XmlInclude(typeof(CreatePwmChannel1FrequencyPayload))]
@@ -4674,8 +4674,50 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(CreateTriggerAllModePayload))]
     [XmlInclude(typeof(CreateTriggerChannelStatePayload))]
     [XmlInclude(typeof(CreatePwmChannelStatePayload))]
-    [XmlInclude(typeof(CreatePwmExecutionStatePayload))]
+    [XmlInclude(typeof(CreatePwmStatePayload))]
     [XmlInclude(typeof(CreateEnableEventsPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel0FrequencyPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel1FrequencyPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel2FrequencyPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel3FrequencyPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel0DutyCyclePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel1DutyCyclePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel2DutyCyclePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel3DutyCyclePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel0NumPulsesPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel1NumPulsesPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel2NumPulsesPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel3NumPulsesPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel0RealFrequencyPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel1RealFrequencyPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel2RealFrequencyPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel3RealFrequencyPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel0RealDutyCyclePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel1RealDutyCyclePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel2RealDutyCyclePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel3RealDutyCyclePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel0PlaybackModePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel1PlaybackModePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel2PlaybackModePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel3PlaybackModePayload))]
+    [XmlInclude(typeof(CreateTimestampedTrigger0TargetsPayload))]
+    [XmlInclude(typeof(CreateTimestampedTrigger1TargetsPayload))]
+    [XmlInclude(typeof(CreateTimestampedTrigger2TargetsPayload))]
+    [XmlInclude(typeof(CreateTimestampedTrigger3TargetsPayload))]
+    [XmlInclude(typeof(CreateTimestampedStartSoftwareTriggerPayload))]
+    [XmlInclude(typeof(CreateTimestampedStopSoftwareTriggerPayload))]
+    [XmlInclude(typeof(CreateTimestampedArmPwmChannelsPayload))]
+    [XmlInclude(typeof(CreateTimestampedTrigger0ModePayload))]
+    [XmlInclude(typeof(CreateTimestampedTrigger1ModePayload))]
+    [XmlInclude(typeof(CreateTimestampedTrigger2ModePayload))]
+    [XmlInclude(typeof(CreateTimestampedTrigger3ModePayload))]
+    [XmlInclude(typeof(CreateTimestampedRequestEnablePayload))]
+    [XmlInclude(typeof(CreateTimestampedEnablePwmChannelsPayload))]
+    [XmlInclude(typeof(CreateTimestampedTriggerAllModePayload))]
+    [XmlInclude(typeof(CreateTimestampedTriggerChannelStatePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannelStatePayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmStatePayload))]
+    [XmlInclude(typeof(CreateTimestampedEnableEventsPayload))]
     [Description("Creates standard message payloads for the MultiPwm device.")]
     public partial class CreateMessage : CreateMessageBuilder, INamedElement
     {
@@ -4691,205 +4733,228 @@ namespace Harp.MultiPwm
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a message payload
     /// that frequency (Hz) of PWM pulses in channel 0.
     /// </summary>
     [DisplayName("PwmChannel0FrequencyPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that frequency (Hz) of PWM pulses in channel 0.")]
-    public partial class CreatePwmChannel0FrequencyPayload : HarpCombinator
+    [Description("Creates a message payload that frequency (Hz) of PWM pulses in channel 0.")]
+    public partial class CreatePwmChannel0FrequencyPayload
     {
         /// <summary>
         /// Gets or sets the value that frequency (Hz) of PWM pulses in channel 0.
         /// </summary>
         [Description("The value that frequency (Hz) of PWM pulses in channel 0.")]
-        public float Value { get; set; }
+        public float PwmChannel0Frequency { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that frequency (Hz) of PWM pulses in channel 0.
+        /// Creates a message payload for the PwmChannel0Frequency register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel0Frequency;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that frequency (Hz) of PWM pulses in channel 0.
+        /// Creates a message that frequency (Hz) of PWM pulses in channel 0.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel0Frequency register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel0Frequency.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel0Frequency.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that frequency (Hz) of PWM pulses in channel 0.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel0FrequencyPayload")]
+    [Description("Creates a timestamped message payload that frequency (Hz) of PWM pulses in channel 0.")]
+    public partial class CreateTimestampedPwmChannel0FrequencyPayload : CreatePwmChannel0FrequencyPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that frequency (Hz) of PWM pulses in channel 0.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel0Frequency register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel0Frequency.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that frequency (Hz) of PWM pulses in channel 1.
     /// </summary>
     [DisplayName("PwmChannel1FrequencyPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that frequency (Hz) of PWM pulses in channel 1.")]
-    public partial class CreatePwmChannel1FrequencyPayload : HarpCombinator
+    [Description("Creates a message payload that frequency (Hz) of PWM pulses in channel 1.")]
+    public partial class CreatePwmChannel1FrequencyPayload
     {
         /// <summary>
         /// Gets or sets the value that frequency (Hz) of PWM pulses in channel 1.
         /// </summary>
         [Description("The value that frequency (Hz) of PWM pulses in channel 1.")]
-        public float Value { get; set; }
+        public float PwmChannel1Frequency { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that frequency (Hz) of PWM pulses in channel 1.
+        /// Creates a message payload for the PwmChannel1Frequency register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel1Frequency;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that frequency (Hz) of PWM pulses in channel 1.
+        /// Creates a message that frequency (Hz) of PWM pulses in channel 1.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel1Frequency register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel1Frequency.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel1Frequency.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that frequency (Hz) of PWM pulses in channel 1.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel1FrequencyPayload")]
+    [Description("Creates a timestamped message payload that frequency (Hz) of PWM pulses in channel 1.")]
+    public partial class CreateTimestampedPwmChannel1FrequencyPayload : CreatePwmChannel1FrequencyPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that frequency (Hz) of PWM pulses in channel 1.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel1Frequency register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel1Frequency.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that frequency (Hz) of PWM pulses in channel 2.
     /// </summary>
     [DisplayName("PwmChannel2FrequencyPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that frequency (Hz) of PWM pulses in channel 2.")]
-    public partial class CreatePwmChannel2FrequencyPayload : HarpCombinator
+    [Description("Creates a message payload that frequency (Hz) of PWM pulses in channel 2.")]
+    public partial class CreatePwmChannel2FrequencyPayload
     {
         /// <summary>
         /// Gets or sets the value that frequency (Hz) of PWM pulses in channel 2.
         /// </summary>
         [Description("The value that frequency (Hz) of PWM pulses in channel 2.")]
-        public float Value { get; set; }
+        public float PwmChannel2Frequency { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that frequency (Hz) of PWM pulses in channel 2.
+        /// Creates a message payload for the PwmChannel2Frequency register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel2Frequency;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that frequency (Hz) of PWM pulses in channel 2.
+        /// Creates a message that frequency (Hz) of PWM pulses in channel 2.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel2Frequency register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel2Frequency.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel2Frequency.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that frequency (Hz) of PWM pulses in channel 2.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel2FrequencyPayload")]
+    [Description("Creates a timestamped message payload that frequency (Hz) of PWM pulses in channel 2.")]
+    public partial class CreateTimestampedPwmChannel2FrequencyPayload : CreatePwmChannel2FrequencyPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that frequency (Hz) of PWM pulses in channel 2.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel2Frequency register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel2Frequency.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that frequency (Hz) of PWM pulses in channel 3.
     /// </summary>
     [DisplayName("PwmChannel3FrequencyPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that frequency (Hz) of PWM pulses in channel 3.")]
-    public partial class CreatePwmChannel3FrequencyPayload : HarpCombinator
+    [Description("Creates a message payload that frequency (Hz) of PWM pulses in channel 3.")]
+    public partial class CreatePwmChannel3FrequencyPayload
     {
         /// <summary>
         /// Gets or sets the value that frequency (Hz) of PWM pulses in channel 3.
         /// </summary>
         [Description("The value that frequency (Hz) of PWM pulses in channel 3.")]
-        public float Value { get; set; }
+        public float PwmChannel3Frequency { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that frequency (Hz) of PWM pulses in channel 3.
+        /// Creates a message payload for the PwmChannel3Frequency register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel3Frequency;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that frequency (Hz) of PWM pulses in channel 3.
+        /// Creates a message that frequency (Hz) of PWM pulses in channel 3.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel3Frequency register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel3Frequency.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel3Frequency.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that frequency (Hz) of PWM pulses in channel 3.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel3FrequencyPayload")]
+    [Description("Creates a timestamped message payload that frequency (Hz) of PWM pulses in channel 3.")]
+    public partial class CreateTimestampedPwmChannel3FrequencyPayload : CreatePwmChannel3FrequencyPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that frequency (Hz) of PWM pulses in channel 3.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel3Frequency register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel3Frequency.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that duty cycle (0-100) of PWM pulses in channel 0.
     /// </summary>
     [DisplayName("PwmChannel0DutyCyclePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that duty cycle (0-100) of PWM pulses in channel 0.")]
-    public partial class CreatePwmChannel0DutyCyclePayload : HarpCombinator
+    [Description("Creates a message payload that duty cycle (0-100) of PWM pulses in channel 0.")]
+    public partial class CreatePwmChannel0DutyCyclePayload
     {
         /// <summary>
         /// Gets or sets the value that duty cycle (0-100) of PWM pulses in channel 0.
@@ -4897,49 +4962,55 @@ namespace Harp.MultiPwm
         [Range(min: 0.1, max: 99.9)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("The value that duty cycle (0-100) of PWM pulses in channel 0.")]
-        public float Value { get; set; } = 50;
+        public float PwmChannel0DutyCycle { get; set; } = 50F;
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that duty cycle (0-100) of PWM pulses in channel 0.
+        /// Creates a message payload for the PwmChannel0DutyCycle register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel0DutyCycle;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that duty cycle (0-100) of PWM pulses in channel 0.
+        /// Creates a message that duty cycle (0-100) of PWM pulses in channel 0.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel0DutyCycle register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel0DutyCycle.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel0DutyCycle.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that duty cycle (0-100) of PWM pulses in channel 0.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel0DutyCyclePayload")]
+    [Description("Creates a timestamped message payload that duty cycle (0-100) of PWM pulses in channel 0.")]
+    public partial class CreateTimestampedPwmChannel0DutyCyclePayload : CreatePwmChannel0DutyCyclePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that duty cycle (0-100) of PWM pulses in channel 0.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel0DutyCycle register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel0DutyCycle.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that duty cycle (0-100) of PWM pulses in channel 1.
     /// </summary>
     [DisplayName("PwmChannel1DutyCyclePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that duty cycle (0-100) of PWM pulses in channel 1.")]
-    public partial class CreatePwmChannel1DutyCyclePayload : HarpCombinator
+    [Description("Creates a message payload that duty cycle (0-100) of PWM pulses in channel 1.")]
+    public partial class CreatePwmChannel1DutyCyclePayload
     {
         /// <summary>
         /// Gets or sets the value that duty cycle (0-100) of PWM pulses in channel 1.
@@ -4947,49 +5018,55 @@ namespace Harp.MultiPwm
         [Range(min: 0.1, max: 99.9)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("The value that duty cycle (0-100) of PWM pulses in channel 1.")]
-        public float Value { get; set; } = 50;
+        public float PwmChannel1DutyCycle { get; set; } = 50F;
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that duty cycle (0-100) of PWM pulses in channel 1.
+        /// Creates a message payload for the PwmChannel1DutyCycle register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel1DutyCycle;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that duty cycle (0-100) of PWM pulses in channel 1.
+        /// Creates a message that duty cycle (0-100) of PWM pulses in channel 1.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel1DutyCycle register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel1DutyCycle.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel1DutyCycle.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that duty cycle (0-100) of PWM pulses in channel 1.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel1DutyCyclePayload")]
+    [Description("Creates a timestamped message payload that duty cycle (0-100) of PWM pulses in channel 1.")]
+    public partial class CreateTimestampedPwmChannel1DutyCyclePayload : CreatePwmChannel1DutyCyclePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that duty cycle (0-100) of PWM pulses in channel 1.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel1DutyCycle register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel1DutyCycle.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that duty cycle (0-100) of PWM pulses in channel 2.
     /// </summary>
     [DisplayName("PwmChannel2DutyCyclePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that duty cycle (0-100) of PWM pulses in channel 2.")]
-    public partial class CreatePwmChannel2DutyCyclePayload : HarpCombinator
+    [Description("Creates a message payload that duty cycle (0-100) of PWM pulses in channel 2.")]
+    public partial class CreatePwmChannel2DutyCyclePayload
     {
         /// <summary>
         /// Gets or sets the value that duty cycle (0-100) of PWM pulses in channel 2.
@@ -4997,49 +5074,55 @@ namespace Harp.MultiPwm
         [Range(min: 0.1, max: 99.9)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("The value that duty cycle (0-100) of PWM pulses in channel 2.")]
-        public float Value { get; set; } = 50;
+        public float PwmChannel2DutyCycle { get; set; } = 50F;
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that duty cycle (0-100) of PWM pulses in channel 2.
+        /// Creates a message payload for the PwmChannel2DutyCycle register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel2DutyCycle;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that duty cycle (0-100) of PWM pulses in channel 2.
+        /// Creates a message that duty cycle (0-100) of PWM pulses in channel 2.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel2DutyCycle register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel2DutyCycle.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel2DutyCycle.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that duty cycle (0-100) of PWM pulses in channel 2.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel2DutyCyclePayload")]
+    [Description("Creates a timestamped message payload that duty cycle (0-100) of PWM pulses in channel 2.")]
+    public partial class CreateTimestampedPwmChannel2DutyCyclePayload : CreatePwmChannel2DutyCyclePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that duty cycle (0-100) of PWM pulses in channel 2.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel2DutyCycle register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel2DutyCycle.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that duty cycle (0-100) of PWM pulses in channel 3.
     /// </summary>
     [DisplayName("PwmChannel3DutyCyclePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that duty cycle (0-100) of PWM pulses in channel 3.")]
-    public partial class CreatePwmChannel3DutyCyclePayload : HarpCombinator
+    [Description("Creates a message payload that duty cycle (0-100) of PWM pulses in channel 3.")]
+    public partial class CreatePwmChannel3DutyCyclePayload
     {
         /// <summary>
         /// Gets or sets the value that duty cycle (0-100) of PWM pulses in channel 3.
@@ -5047,1153 +5130,1297 @@ namespace Harp.MultiPwm
         [Range(min: 0.1, max: 99.9)]
         [Editor(DesignTypes.NumericUpDownEditor, DesignTypes.UITypeEditor)]
         [Description("The value that duty cycle (0-100) of PWM pulses in channel 3.")]
-        public float Value { get; set; } = 50;
+        public float PwmChannel3DutyCycle { get; set; } = 50F;
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that duty cycle (0-100) of PWM pulses in channel 3.
+        /// Creates a message payload for the PwmChannel3DutyCycle register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel3DutyCycle;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that duty cycle (0-100) of PWM pulses in channel 3.
+        /// Creates a message that duty cycle (0-100) of PWM pulses in channel 3.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel3DutyCycle register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel3DutyCycle.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel3DutyCycle.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that duty cycle (0-100) of PWM pulses in channel 3.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel3DutyCyclePayload")]
+    [Description("Creates a timestamped message payload that duty cycle (0-100) of PWM pulses in channel 3.")]
+    public partial class CreateTimestampedPwmChannel3DutyCyclePayload : CreatePwmChannel3DutyCyclePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that duty cycle (0-100) of PWM pulses in channel 3.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel3DutyCycle register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel3DutyCycle.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that total number of pulses to be generated in channel 0.
     /// </summary>
     [DisplayName("PwmChannel0NumPulsesPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that total number of pulses to be generated in channel 0.")]
-    public partial class CreatePwmChannel0NumPulsesPayload : HarpCombinator
+    [Description("Creates a message payload that total number of pulses to be generated in channel 0.")]
+    public partial class CreatePwmChannel0NumPulsesPayload
     {
         /// <summary>
         /// Gets or sets the value that total number of pulses to be generated in channel 0.
         /// </summary>
         [Description("The value that total number of pulses to be generated in channel 0.")]
-        public uint Value { get; set; }
+        public uint PwmChannel0NumPulses { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that total number of pulses to be generated in channel 0.
+        /// Creates a message payload for the PwmChannel0NumPulses register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public uint GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel0NumPulses;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that total number of pulses to be generated in channel 0.
+        /// Creates a message that total number of pulses to be generated in channel 0.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel0NumPulses register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel0NumPulses.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel0NumPulses.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that total number of pulses to be generated in channel 0.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel0NumPulsesPayload")]
+    [Description("Creates a timestamped message payload that total number of pulses to be generated in channel 0.")]
+    public partial class CreateTimestampedPwmChannel0NumPulsesPayload : CreatePwmChannel0NumPulsesPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that total number of pulses to be generated in channel 0.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel0NumPulses register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel0NumPulses.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that total number of pulses to be generated in channel 1.
     /// </summary>
     [DisplayName("PwmChannel1NumPulsesPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that total number of pulses to be generated in channel 1.")]
-    public partial class CreatePwmChannel1NumPulsesPayload : HarpCombinator
+    [Description("Creates a message payload that total number of pulses to be generated in channel 1.")]
+    public partial class CreatePwmChannel1NumPulsesPayload
     {
         /// <summary>
         /// Gets or sets the value that total number of pulses to be generated in channel 1.
         /// </summary>
         [Description("The value that total number of pulses to be generated in channel 1.")]
-        public uint Value { get; set; }
+        public uint PwmChannel1NumPulses { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that total number of pulses to be generated in channel 1.
+        /// Creates a message payload for the PwmChannel1NumPulses register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public uint GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel1NumPulses;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that total number of pulses to be generated in channel 1.
+        /// Creates a message that total number of pulses to be generated in channel 1.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel1NumPulses register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel1NumPulses.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel1NumPulses.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that total number of pulses to be generated in channel 1.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel1NumPulsesPayload")]
+    [Description("Creates a timestamped message payload that total number of pulses to be generated in channel 1.")]
+    public partial class CreateTimestampedPwmChannel1NumPulsesPayload : CreatePwmChannel1NumPulsesPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that total number of pulses to be generated in channel 1.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel1NumPulses register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel1NumPulses.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that total number of pulses to be generated in channel 2.
     /// </summary>
     [DisplayName("PwmChannel2NumPulsesPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that total number of pulses to be generated in channel 2.")]
-    public partial class CreatePwmChannel2NumPulsesPayload : HarpCombinator
+    [Description("Creates a message payload that total number of pulses to be generated in channel 2.")]
+    public partial class CreatePwmChannel2NumPulsesPayload
     {
         /// <summary>
         /// Gets or sets the value that total number of pulses to be generated in channel 2.
         /// </summary>
         [Description("The value that total number of pulses to be generated in channel 2.")]
-        public uint Value { get; set; }
+        public uint PwmChannel2NumPulses { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that total number of pulses to be generated in channel 2.
+        /// Creates a message payload for the PwmChannel2NumPulses register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public uint GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel2NumPulses;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that total number of pulses to be generated in channel 2.
+        /// Creates a message that total number of pulses to be generated in channel 2.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel2NumPulses register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel2NumPulses.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel2NumPulses.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that total number of pulses to be generated in channel 2.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel2NumPulsesPayload")]
+    [Description("Creates a timestamped message payload that total number of pulses to be generated in channel 2.")]
+    public partial class CreateTimestampedPwmChannel2NumPulsesPayload : CreatePwmChannel2NumPulsesPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that total number of pulses to be generated in channel 2.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel2NumPulses register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel2NumPulses.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that total number of pulses to be generated in channel 3.
     /// </summary>
     [DisplayName("PwmChannel3NumPulsesPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that total number of pulses to be generated in channel 3.")]
-    public partial class CreatePwmChannel3NumPulsesPayload : HarpCombinator
+    [Description("Creates a message payload that total number of pulses to be generated in channel 3.")]
+    public partial class CreatePwmChannel3NumPulsesPayload
     {
         /// <summary>
         /// Gets or sets the value that total number of pulses to be generated in channel 3.
         /// </summary>
         [Description("The value that total number of pulses to be generated in channel 3.")]
-        public uint Value { get; set; }
+        public uint PwmChannel3NumPulses { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that total number of pulses to be generated in channel 3.
+        /// Creates a message payload for the PwmChannel3NumPulses register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public uint GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel3NumPulses;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that total number of pulses to be generated in channel 3.
+        /// Creates a message that total number of pulses to be generated in channel 3.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel3NumPulses register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel3NumPulses.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel3NumPulses.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that total number of pulses to be generated in channel 3.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel3NumPulsesPayload")]
+    [Description("Creates a timestamped message payload that total number of pulses to be generated in channel 3.")]
+    public partial class CreateTimestampedPwmChannel3NumPulsesPayload : CreatePwmChannel3NumPulsesPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that total number of pulses to be generated in channel 3.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel3NumPulses register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel3NumPulses.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that real frequency (Hz) of PWM pulses in channel 0.
     /// </summary>
     [DisplayName("PwmChannel0RealFrequencyPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that real frequency (Hz) of PWM pulses in channel 0.")]
-    public partial class CreatePwmChannel0RealFrequencyPayload : HarpCombinator
+    [Description("Creates a message payload that real frequency (Hz) of PWM pulses in channel 0.")]
+    public partial class CreatePwmChannel0RealFrequencyPayload
     {
         /// <summary>
         /// Gets or sets the value that real frequency (Hz) of PWM pulses in channel 0.
         /// </summary>
         [Description("The value that real frequency (Hz) of PWM pulses in channel 0.")]
-        public float Value { get; set; }
+        public float PwmChannel0RealFrequency { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that real frequency (Hz) of PWM pulses in channel 0.
+        /// Creates a message payload for the PwmChannel0RealFrequency register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel0RealFrequency;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that real frequency (Hz) of PWM pulses in channel 0.
+        /// Creates a message that real frequency (Hz) of PWM pulses in channel 0.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel0RealFrequency register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel0RealFrequency.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel0RealFrequency.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that real frequency (Hz) of PWM pulses in channel 0.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel0RealFrequencyPayload")]
+    [Description("Creates a timestamped message payload that real frequency (Hz) of PWM pulses in channel 0.")]
+    public partial class CreateTimestampedPwmChannel0RealFrequencyPayload : CreatePwmChannel0RealFrequencyPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that real frequency (Hz) of PWM pulses in channel 0.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel0RealFrequency register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel0RealFrequency.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that real frequency (Hz) of PWM pulses in channel 1.
     /// </summary>
     [DisplayName("PwmChannel1RealFrequencyPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that real frequency (Hz) of PWM pulses in channel 1.")]
-    public partial class CreatePwmChannel1RealFrequencyPayload : HarpCombinator
+    [Description("Creates a message payload that real frequency (Hz) of PWM pulses in channel 1.")]
+    public partial class CreatePwmChannel1RealFrequencyPayload
     {
         /// <summary>
         /// Gets or sets the value that real frequency (Hz) of PWM pulses in channel 1.
         /// </summary>
         [Description("The value that real frequency (Hz) of PWM pulses in channel 1.")]
-        public float Value { get; set; }
+        public float PwmChannel1RealFrequency { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that real frequency (Hz) of PWM pulses in channel 1.
+        /// Creates a message payload for the PwmChannel1RealFrequency register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel1RealFrequency;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that real frequency (Hz) of PWM pulses in channel 1.
+        /// Creates a message that real frequency (Hz) of PWM pulses in channel 1.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel1RealFrequency register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel1RealFrequency.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel1RealFrequency.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that real frequency (Hz) of PWM pulses in channel 1.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel1RealFrequencyPayload")]
+    [Description("Creates a timestamped message payload that real frequency (Hz) of PWM pulses in channel 1.")]
+    public partial class CreateTimestampedPwmChannel1RealFrequencyPayload : CreatePwmChannel1RealFrequencyPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that real frequency (Hz) of PWM pulses in channel 1.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel1RealFrequency register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel1RealFrequency.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that real frequency (Hz) of PWM pulses in channel 2.
     /// </summary>
     [DisplayName("PwmChannel2RealFrequencyPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that real frequency (Hz) of PWM pulses in channel 2.")]
-    public partial class CreatePwmChannel2RealFrequencyPayload : HarpCombinator
+    [Description("Creates a message payload that real frequency (Hz) of PWM pulses in channel 2.")]
+    public partial class CreatePwmChannel2RealFrequencyPayload
     {
         /// <summary>
         /// Gets or sets the value that real frequency (Hz) of PWM pulses in channel 2.
         /// </summary>
         [Description("The value that real frequency (Hz) of PWM pulses in channel 2.")]
-        public float Value { get; set; }
+        public float PwmChannel2RealFrequency { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that real frequency (Hz) of PWM pulses in channel 2.
+        /// Creates a message payload for the PwmChannel2RealFrequency register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel2RealFrequency;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that real frequency (Hz) of PWM pulses in channel 2.
+        /// Creates a message that real frequency (Hz) of PWM pulses in channel 2.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel2RealFrequency register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel2RealFrequency.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel2RealFrequency.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that real frequency (Hz) of PWM pulses in channel 2.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel2RealFrequencyPayload")]
+    [Description("Creates a timestamped message payload that real frequency (Hz) of PWM pulses in channel 2.")]
+    public partial class CreateTimestampedPwmChannel2RealFrequencyPayload : CreatePwmChannel2RealFrequencyPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that real frequency (Hz) of PWM pulses in channel 2.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel2RealFrequency register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel2RealFrequency.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that real frequency (Hz) of PWM pulses in channel 3.
     /// </summary>
     [DisplayName("PwmChannel3RealFrequencyPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that real frequency (Hz) of PWM pulses in channel 3.")]
-    public partial class CreatePwmChannel3RealFrequencyPayload : HarpCombinator
+    [Description("Creates a message payload that real frequency (Hz) of PWM pulses in channel 3.")]
+    public partial class CreatePwmChannel3RealFrequencyPayload
     {
         /// <summary>
         /// Gets or sets the value that real frequency (Hz) of PWM pulses in channel 3.
         /// </summary>
         [Description("The value that real frequency (Hz) of PWM pulses in channel 3.")]
-        public float Value { get; set; }
+        public float PwmChannel3RealFrequency { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that real frequency (Hz) of PWM pulses in channel 3.
+        /// Creates a message payload for the PwmChannel3RealFrequency register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel3RealFrequency;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that real frequency (Hz) of PWM pulses in channel 3.
+        /// Creates a message that real frequency (Hz) of PWM pulses in channel 3.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel3RealFrequency register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel3RealFrequency.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel3RealFrequency.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that real frequency (Hz) of PWM pulses in channel 3.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel3RealFrequencyPayload")]
+    [Description("Creates a timestamped message payload that real frequency (Hz) of PWM pulses in channel 3.")]
+    public partial class CreateTimestampedPwmChannel3RealFrequencyPayload : CreatePwmChannel3RealFrequencyPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that real frequency (Hz) of PWM pulses in channel 3.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel3RealFrequency register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel3RealFrequency.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that real duty cycle (0-100) of PWM pulses in channel 0.
     /// </summary>
     [DisplayName("PwmChannel0RealDutyCyclePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that real duty cycle (0-100) of PWM pulses in channel 0.")]
-    public partial class CreatePwmChannel0RealDutyCyclePayload : HarpCombinator
+    [Description("Creates a message payload that real duty cycle (0-100) of PWM pulses in channel 0.")]
+    public partial class CreatePwmChannel0RealDutyCyclePayload
     {
         /// <summary>
         /// Gets or sets the value that real duty cycle (0-100) of PWM pulses in channel 0.
         /// </summary>
         [Description("The value that real duty cycle (0-100) of PWM pulses in channel 0.")]
-        public float Value { get; set; }
+        public float PwmChannel0RealDutyCycle { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that real duty cycle (0-100) of PWM pulses in channel 0.
+        /// Creates a message payload for the PwmChannel0RealDutyCycle register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel0RealDutyCycle;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that real duty cycle (0-100) of PWM pulses in channel 0.
+        /// Creates a message that real duty cycle (0-100) of PWM pulses in channel 0.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel0RealDutyCycle register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel0RealDutyCycle.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel0RealDutyCycle.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that real duty cycle (0-100) of PWM pulses in channel 0.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel0RealDutyCyclePayload")]
+    [Description("Creates a timestamped message payload that real duty cycle (0-100) of PWM pulses in channel 0.")]
+    public partial class CreateTimestampedPwmChannel0RealDutyCyclePayload : CreatePwmChannel0RealDutyCyclePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that real duty cycle (0-100) of PWM pulses in channel 0.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel0RealDutyCycle register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel0RealDutyCycle.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that real duty cycle (0-100) of PWM pulses in channel 1.
     /// </summary>
     [DisplayName("PwmChannel1RealDutyCyclePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that real duty cycle (0-100) of PWM pulses in channel 1.")]
-    public partial class CreatePwmChannel1RealDutyCyclePayload : HarpCombinator
+    [Description("Creates a message payload that real duty cycle (0-100) of PWM pulses in channel 1.")]
+    public partial class CreatePwmChannel1RealDutyCyclePayload
     {
         /// <summary>
         /// Gets or sets the value that real duty cycle (0-100) of PWM pulses in channel 1.
         /// </summary>
         [Description("The value that real duty cycle (0-100) of PWM pulses in channel 1.")]
-        public float Value { get; set; }
+        public float PwmChannel1RealDutyCycle { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that real duty cycle (0-100) of PWM pulses in channel 1.
+        /// Creates a message payload for the PwmChannel1RealDutyCycle register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel1RealDutyCycle;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that real duty cycle (0-100) of PWM pulses in channel 1.
+        /// Creates a message that real duty cycle (0-100) of PWM pulses in channel 1.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel1RealDutyCycle register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel1RealDutyCycle.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel1RealDutyCycle.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that real duty cycle (0-100) of PWM pulses in channel 1.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel1RealDutyCyclePayload")]
+    [Description("Creates a timestamped message payload that real duty cycle (0-100) of PWM pulses in channel 1.")]
+    public partial class CreateTimestampedPwmChannel1RealDutyCyclePayload : CreatePwmChannel1RealDutyCyclePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that real duty cycle (0-100) of PWM pulses in channel 1.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel1RealDutyCycle register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel1RealDutyCycle.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that real duty cycle (0-100) of PWM pulses in channel 2.
     /// </summary>
     [DisplayName("PwmChannel2RealDutyCyclePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that real duty cycle (0-100) of PWM pulses in channel 2.")]
-    public partial class CreatePwmChannel2RealDutyCyclePayload : HarpCombinator
+    [Description("Creates a message payload that real duty cycle (0-100) of PWM pulses in channel 2.")]
+    public partial class CreatePwmChannel2RealDutyCyclePayload
     {
         /// <summary>
         /// Gets or sets the value that real duty cycle (0-100) of PWM pulses in channel 2.
         /// </summary>
         [Description("The value that real duty cycle (0-100) of PWM pulses in channel 2.")]
-        public float Value { get; set; }
+        public float PwmChannel2RealDutyCycle { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that real duty cycle (0-100) of PWM pulses in channel 2.
+        /// Creates a message payload for the PwmChannel2RealDutyCycle register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel2RealDutyCycle;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that real duty cycle (0-100) of PWM pulses in channel 2.
+        /// Creates a message that real duty cycle (0-100) of PWM pulses in channel 2.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel2RealDutyCycle register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel2RealDutyCycle.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel2RealDutyCycle.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that real duty cycle (0-100) of PWM pulses in channel 2.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel2RealDutyCyclePayload")]
+    [Description("Creates a timestamped message payload that real duty cycle (0-100) of PWM pulses in channel 2.")]
+    public partial class CreateTimestampedPwmChannel2RealDutyCyclePayload : CreatePwmChannel2RealDutyCyclePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that real duty cycle (0-100) of PWM pulses in channel 2.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel2RealDutyCycle register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel2RealDutyCycle.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that real duty cycle (0-100) of PWM pulses in channel 3.
     /// </summary>
     [DisplayName("PwmChannel3RealDutyCyclePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that real duty cycle (0-100) of PWM pulses in channel 3.")]
-    public partial class CreatePwmChannel3RealDutyCyclePayload : HarpCombinator
+    [Description("Creates a message payload that real duty cycle (0-100) of PWM pulses in channel 3.")]
+    public partial class CreatePwmChannel3RealDutyCyclePayload
     {
         /// <summary>
         /// Gets or sets the value that real duty cycle (0-100) of PWM pulses in channel 3.
         /// </summary>
         [Description("The value that real duty cycle (0-100) of PWM pulses in channel 3.")]
-        public float Value { get; set; }
+        public float PwmChannel3RealDutyCycle { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that real duty cycle (0-100) of PWM pulses in channel 3.
+        /// Creates a message payload for the PwmChannel3RealDutyCycle register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public float GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel3RealDutyCycle;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that real duty cycle (0-100) of PWM pulses in channel 3.
+        /// Creates a message that real duty cycle (0-100) of PWM pulses in channel 3.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel3RealDutyCycle register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel3RealDutyCycle.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel3RealDutyCycle.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that real duty cycle (0-100) of PWM pulses in channel 3.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel3RealDutyCyclePayload")]
+    [Description("Creates a timestamped message payload that real duty cycle (0-100) of PWM pulses in channel 3.")]
+    public partial class CreateTimestampedPwmChannel3RealDutyCyclePayload : CreatePwmChannel3RealDutyCyclePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that real duty cycle (0-100) of PWM pulses in channel 3.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel3RealDutyCycle register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel3RealDutyCycle.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that playback mode of channel 0.
     /// </summary>
     [DisplayName("PwmChannel0PlaybackModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that playback mode of channel 0.")]
-    public partial class CreatePwmChannel0PlaybackModePayload : HarpCombinator
+    [Description("Creates a message payload that playback mode of channel 0.")]
+    public partial class CreatePwmChannel0PlaybackModePayload
     {
         /// <summary>
         /// Gets or sets the value that playback mode of channel 0.
         /// </summary>
         [Description("The value that playback mode of channel 0.")]
-        public PwmPlaybackMode Value { get; set; }
+        public PlaybackMode PwmChannel0PlaybackMode { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that playback mode of channel 0.
+        /// Creates a message payload for the PwmChannel0PlaybackMode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PlaybackMode GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel0PlaybackMode;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that playback mode of channel 0.
+        /// Creates a message that playback mode of channel 0.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel0PlaybackMode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel0PlaybackMode.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel0PlaybackMode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that playback mode of channel 0.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel0PlaybackModePayload")]
+    [Description("Creates a timestamped message payload that playback mode of channel 0.")]
+    public partial class CreateTimestampedPwmChannel0PlaybackModePayload : CreatePwmChannel0PlaybackModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that playback mode of channel 0.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel0PlaybackMode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel0PlaybackMode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that playback mode of channel 1.
     /// </summary>
     [DisplayName("PwmChannel1PlaybackModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that playback mode of channel 1.")]
-    public partial class CreatePwmChannel1PlaybackModePayload : HarpCombinator
+    [Description("Creates a message payload that playback mode of channel 1.")]
+    public partial class CreatePwmChannel1PlaybackModePayload
     {
         /// <summary>
         /// Gets or sets the value that playback mode of channel 1.
         /// </summary>
         [Description("The value that playback mode of channel 1.")]
-        public PwmPlaybackMode Value { get; set; }
+        public PlaybackMode PwmChannel1PlaybackMode { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that playback mode of channel 1.
+        /// Creates a message payload for the PwmChannel1PlaybackMode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PlaybackMode GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel1PlaybackMode;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that playback mode of channel 1.
+        /// Creates a message that playback mode of channel 1.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel1PlaybackMode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel1PlaybackMode.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel1PlaybackMode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that playback mode of channel 1.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel1PlaybackModePayload")]
+    [Description("Creates a timestamped message payload that playback mode of channel 1.")]
+    public partial class CreateTimestampedPwmChannel1PlaybackModePayload : CreatePwmChannel1PlaybackModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that playback mode of channel 1.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel1PlaybackMode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel1PlaybackMode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that playback mode of channel 2.
     /// </summary>
     [DisplayName("PwmChannel2PlaybackModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that playback mode of channel 2.")]
-    public partial class CreatePwmChannel2PlaybackModePayload : HarpCombinator
+    [Description("Creates a message payload that playback mode of channel 2.")]
+    public partial class CreatePwmChannel2PlaybackModePayload
     {
         /// <summary>
         /// Gets or sets the value that playback mode of channel 2.
         /// </summary>
         [Description("The value that playback mode of channel 2.")]
-        public PwmPlaybackMode Value { get; set; }
+        public PlaybackMode PwmChannel2PlaybackMode { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that playback mode of channel 2.
+        /// Creates a message payload for the PwmChannel2PlaybackMode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PlaybackMode GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel2PlaybackMode;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that playback mode of channel 2.
+        /// Creates a message that playback mode of channel 2.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel2PlaybackMode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel2PlaybackMode.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel2PlaybackMode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that playback mode of channel 2.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel2PlaybackModePayload")]
+    [Description("Creates a timestamped message payload that playback mode of channel 2.")]
+    public partial class CreateTimestampedPwmChannel2PlaybackModePayload : CreatePwmChannel2PlaybackModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that playback mode of channel 2.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel2PlaybackMode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel2PlaybackMode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that playback mode of channel 3.
     /// </summary>
     [DisplayName("PwmChannel3PlaybackModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that playback mode of channel 3.")]
-    public partial class CreatePwmChannel3PlaybackModePayload : HarpCombinator
+    [Description("Creates a message payload that playback mode of channel 3.")]
+    public partial class CreatePwmChannel3PlaybackModePayload
     {
         /// <summary>
         /// Gets or sets the value that playback mode of channel 3.
         /// </summary>
         [Description("The value that playback mode of channel 3.")]
-        public PwmPlaybackMode Value { get; set; }
+        public PlaybackMode PwmChannel3PlaybackMode { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that playback mode of channel 3.
+        /// Creates a message payload for the PwmChannel3PlaybackMode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PlaybackMode GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannel3PlaybackMode;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that playback mode of channel 3.
+        /// Creates a message that playback mode of channel 3.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannel3PlaybackMode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannel3PlaybackMode.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannel3PlaybackMode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that playback mode of channel 3.
+    /// </summary>
+    [DisplayName("TimestampedPwmChannel3PlaybackModePayload")]
+    [Description("Creates a timestamped message payload that playback mode of channel 3.")]
+    public partial class CreateTimestampedPwmChannel3PlaybackModePayload : CreatePwmChannel3PlaybackModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that playback mode of channel 3.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannel3PlaybackMode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmChannel3PlaybackMode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that target channels that will start the PWM sequence if Trigger0 is activated.
     /// </summary>
     [DisplayName("Trigger0TargetsPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that target channels that will start the PWM sequence if Trigger0 is activated.")]
-    public partial class CreateTrigger0TargetsPayload : HarpCombinator
+    [Description("Creates a message payload that target channels that will start the PWM sequence if Trigger0 is activated.")]
+    public partial class CreateTrigger0TargetsPayload
     {
         /// <summary>
         /// Gets or sets the value that target channels that will start the PWM sequence if Trigger0 is activated.
         /// </summary>
         [Description("The value that target channels that will start the PWM sequence if Trigger0 is activated.")]
-        public PwmChannels Value { get; set; }
+        public PwmChannels Trigger0Targets { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that target channels that will start the PWM sequence if Trigger0 is activated.
+        /// Creates a message payload for the Trigger0Targets register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return Trigger0Targets;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that target channels that will start the PWM sequence if Trigger0 is activated.
+        /// Creates a message that target channels that will start the PWM sequence if Trigger0 is activated.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Trigger0Targets register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => Trigger0Targets.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.Trigger0Targets.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that target channels that will start the PWM sequence if Trigger0 is activated.
+    /// </summary>
+    [DisplayName("TimestampedTrigger0TargetsPayload")]
+    [Description("Creates a timestamped message payload that target channels that will start the PWM sequence if Trigger0 is activated.")]
+    public partial class CreateTimestampedTrigger0TargetsPayload : CreateTrigger0TargetsPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that target channels that will start the PWM sequence if Trigger0 is activated.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Trigger0Targets register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.Trigger0Targets.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that target channels that will start the PWM sequence if Trigger1 is activated.
     /// </summary>
     [DisplayName("Trigger1TargetsPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that target channels that will start the PWM sequence if Trigger1 is activated.")]
-    public partial class CreateTrigger1TargetsPayload : HarpCombinator
+    [Description("Creates a message payload that target channels that will start the PWM sequence if Trigger1 is activated.")]
+    public partial class CreateTrigger1TargetsPayload
     {
         /// <summary>
         /// Gets or sets the value that target channels that will start the PWM sequence if Trigger1 is activated.
         /// </summary>
         [Description("The value that target channels that will start the PWM sequence if Trigger1 is activated.")]
-        public PwmChannels Value { get; set; }
+        public PwmChannels Trigger1Targets { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that target channels that will start the PWM sequence if Trigger1 is activated.
+        /// Creates a message payload for the Trigger1Targets register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return Trigger1Targets;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that target channels that will start the PWM sequence if Trigger1 is activated.
+        /// Creates a message that target channels that will start the PWM sequence if Trigger1 is activated.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Trigger1Targets register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => Trigger1Targets.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.Trigger1Targets.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that target channels that will start the PWM sequence if Trigger1 is activated.
+    /// </summary>
+    [DisplayName("TimestampedTrigger1TargetsPayload")]
+    [Description("Creates a timestamped message payload that target channels that will start the PWM sequence if Trigger1 is activated.")]
+    public partial class CreateTimestampedTrigger1TargetsPayload : CreateTrigger1TargetsPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that target channels that will start the PWM sequence if Trigger1 is activated.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Trigger1Targets register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.Trigger1Targets.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that target channels that will start the PWM sequence if Trigger2 is activated.
     /// </summary>
     [DisplayName("Trigger2TargetsPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that target channels that will start the PWM sequence if Trigger2 is activated.")]
-    public partial class CreateTrigger2TargetsPayload : HarpCombinator
+    [Description("Creates a message payload that target channels that will start the PWM sequence if Trigger2 is activated.")]
+    public partial class CreateTrigger2TargetsPayload
     {
         /// <summary>
         /// Gets or sets the value that target channels that will start the PWM sequence if Trigger2 is activated.
         /// </summary>
         [Description("The value that target channels that will start the PWM sequence if Trigger2 is activated.")]
-        public PwmChannels Value { get; set; }
+        public PwmChannels Trigger2Targets { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that target channels that will start the PWM sequence if Trigger2 is activated.
+        /// Creates a message payload for the Trigger2Targets register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return Trigger2Targets;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that target channels that will start the PWM sequence if Trigger2 is activated.
+        /// Creates a message that target channels that will start the PWM sequence if Trigger2 is activated.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Trigger2Targets register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => Trigger2Targets.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.Trigger2Targets.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that target channels that will start the PWM sequence if Trigger2 is activated.
+    /// </summary>
+    [DisplayName("TimestampedTrigger2TargetsPayload")]
+    [Description("Creates a timestamped message payload that target channels that will start the PWM sequence if Trigger2 is activated.")]
+    public partial class CreateTimestampedTrigger2TargetsPayload : CreateTrigger2TargetsPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that target channels that will start the PWM sequence if Trigger2 is activated.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Trigger2Targets register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.Trigger2Targets.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that target channels that will start the PWM sequence if Trigger3 is activated.
     /// </summary>
     [DisplayName("Trigger3TargetsPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that target channels that will start the PWM sequence if Trigger3 is activated.")]
-    public partial class CreateTrigger3TargetsPayload : HarpCombinator
+    [Description("Creates a message payload that target channels that will start the PWM sequence if Trigger3 is activated.")]
+    public partial class CreateTrigger3TargetsPayload
     {
         /// <summary>
         /// Gets or sets the value that target channels that will start the PWM sequence if Trigger3 is activated.
         /// </summary>
         [Description("The value that target channels that will start the PWM sequence if Trigger3 is activated.")]
-        public PwmChannels Value { get; set; }
+        public PwmChannels Trigger3Targets { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that target channels that will start the PWM sequence if Trigger3 is activated.
+        /// Creates a message payload for the Trigger3Targets register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return Trigger3Targets;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that target channels that will start the PWM sequence if Trigger3 is activated.
+        /// Creates a message that target channels that will start the PWM sequence if Trigger3 is activated.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Trigger3Targets register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => Trigger3Targets.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.Trigger3Targets.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that target channels that will start the PWM sequence if Trigger3 is activated.
+    /// </summary>
+    [DisplayName("TimestampedTrigger3TargetsPayload")]
+    [Description("Creates a timestamped message payload that target channels that will start the PWM sequence if Trigger3 is activated.")]
+    public partial class CreateTimestampedTrigger3TargetsPayload : CreateTrigger3TargetsPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that target channels that will start the PWM sequence if Trigger3 is activated.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Trigger3Targets register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.Trigger3Targets.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that emits a start software-trigger on the channels specified in the mask.
     /// </summary>
     [DisplayName("StartSoftwareTriggerPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that emits a start software-trigger on the channels specified in the mask.")]
-    public partial class CreateStartSoftwareTriggerPayload : HarpCombinator
+    [Description("Creates a message payload that emits a start software-trigger on the channels specified in the mask.")]
+    public partial class CreateStartSoftwareTriggerPayload
     {
         /// <summary>
         /// Gets or sets the value that emits a start software-trigger on the channels specified in the mask.
         /// </summary>
         [Description("The value that emits a start software-trigger on the channels specified in the mask.")]
-        public TriggerInput Value { get; set; }
+        public TriggerInput StartSoftwareTrigger { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that emits a start software-trigger on the channels specified in the mask.
+        /// Creates a message payload for the StartSoftwareTrigger register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public TriggerInput GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return StartSoftwareTrigger;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that emits a start software-trigger on the channels specified in the mask.
+        /// Creates a message that emits a start software-trigger on the channels specified in the mask.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the StartSoftwareTrigger register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => StartSoftwareTrigger.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.StartSoftwareTrigger.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that emits a start software-trigger on the channels specified in the mask.
+    /// </summary>
+    [DisplayName("TimestampedStartSoftwareTriggerPayload")]
+    [Description("Creates a timestamped message payload that emits a start software-trigger on the channels specified in the mask.")]
+    public partial class CreateTimestampedStartSoftwareTriggerPayload : CreateStartSoftwareTriggerPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that emits a start software-trigger on the channels specified in the mask.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the StartSoftwareTrigger register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.StartSoftwareTrigger.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that emits a stop software-trigger on the channels specified in the mask.
     /// </summary>
     [DisplayName("StopSoftwareTriggerPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that emits a stop software-trigger on the channels specified in the mask.")]
-    public partial class CreateStopSoftwareTriggerPayload : HarpCombinator
+    [Description("Creates a message payload that emits a stop software-trigger on the channels specified in the mask.")]
+    public partial class CreateStopSoftwareTriggerPayload
     {
         /// <summary>
         /// Gets or sets the value that emits a stop software-trigger on the channels specified in the mask.
         /// </summary>
         [Description("The value that emits a stop software-trigger on the channels specified in the mask.")]
-        public TriggerInput Value { get; set; }
+        public TriggerInput StopSoftwareTrigger { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that emits a stop software-trigger on the channels specified in the mask.
+        /// Creates a message payload for the StopSoftwareTrigger register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public TriggerInput GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return StopSoftwareTrigger;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that emits a stop software-trigger on the channels specified in the mask.
+        /// Creates a message that emits a stop software-trigger on the channels specified in the mask.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the StopSoftwareTrigger register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => StopSoftwareTrigger.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.StopSoftwareTrigger.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that emits a stop software-trigger on the channels specified in the mask.
+    /// </summary>
+    [DisplayName("TimestampedStopSoftwareTriggerPayload")]
+    [Description("Creates a timestamped message payload that emits a stop software-trigger on the channels specified in the mask.")]
+    public partial class CreateTimestampedStopSoftwareTriggerPayload : CreateStopSoftwareTriggerPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that emits a stop software-trigger on the channels specified in the mask.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the StopSoftwareTrigger register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.StopSoftwareTrigger.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.
     /// </summary>
     [DisplayName("ArmPwmChannelsPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.")]
-    public partial class CreateArmPwmChannelsPayload : HarpCombinator
+    [Description("Creates a message payload that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.")]
+    public partial class CreateArmPwmChannelsPayload
     {
         /// <summary>
         /// Gets or sets the value that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.
         /// </summary>
         [Description("The value that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.")]
-        public PwmChannels Value { get; set; }
+        public PwmChannels ArmPwmChannels { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.
+        /// Creates a message payload for the ArmPwmChannels register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return ArmPwmChannels;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.
+        /// Creates a message that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the ArmPwmChannels register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => ArmPwmChannels.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.ArmPwmChannels.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.
+    /// </summary>
+    [DisplayName("TimestampedArmPwmChannelsPayload")]
+    [Description("Creates a timestamped message payload that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.")]
+    public partial class CreateTimestampedArmPwmChannelsPayload : CreateArmPwmChannelsPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that arms the PWM channels specified in the mask. Once a PWM is triggered, it must be rearmed.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the ArmPwmChannels register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.ArmPwmChannels.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that trigger mode of input channel 0.
     /// </summary>
     [DisplayName("Trigger0ModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that trigger mode of input channel 0.")]
-    public partial class CreateTrigger0ModePayload : HarpCombinator
+    [Description("Creates a message payload that trigger mode of input channel 0.")]
+    public partial class CreateTrigger0ModePayload
     {
         /// <summary>
         /// Gets or sets a value that specifies the trigger mode.
@@ -6208,52 +6435,55 @@ namespace Harp.MultiPwm
         public TriggerPolarity Polarity { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that trigger mode of input channel 0.
+        /// Creates a message payload for the Trigger0Mode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public Trigger0ModePayload GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            Trigger0ModePayload value;
+            value.TriggerMode = TriggerMode;
+            value.Polarity = Polarity;
+            return value;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that trigger mode of input channel 0.
+        /// Creates a message that trigger mode of input channel 0.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Trigger0Mode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ =>
-            {
-                Trigger0ModePayload value;
-                value.TriggerMode = TriggerMode;
-                value.Polarity = Polarity;
-                return Trigger0Mode.FromPayload(MessageType, value);
-            });
+            return Harp.MultiPwm.Trigger0Mode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that trigger mode of input channel 0.
+    /// </summary>
+    [DisplayName("TimestampedTrigger0ModePayload")]
+    [Description("Creates a timestamped message payload that trigger mode of input channel 0.")]
+    public partial class CreateTimestampedTrigger0ModePayload : CreateTrigger0ModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that trigger mode of input channel 0.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Trigger0Mode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.Trigger0Mode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that trigger mode of input channel 1.
     /// </summary>
     [DisplayName("Trigger1ModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that trigger mode of input channel 1.")]
-    public partial class CreateTrigger1ModePayload : HarpCombinator
+    [Description("Creates a message payload that trigger mode of input channel 1.")]
+    public partial class CreateTrigger1ModePayload
     {
         /// <summary>
         /// Gets or sets a value that specifies the trigger mode.
@@ -6268,52 +6498,55 @@ namespace Harp.MultiPwm
         public TriggerPolarity Polarity { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that trigger mode of input channel 1.
+        /// Creates a message payload for the Trigger1Mode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public Trigger1ModePayload GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            Trigger1ModePayload value;
+            value.TriggerMode = TriggerMode;
+            value.Polarity = Polarity;
+            return value;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that trigger mode of input channel 1.
+        /// Creates a message that trigger mode of input channel 1.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Trigger1Mode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ =>
-            {
-                Trigger1ModePayload value;
-                value.TriggerMode = TriggerMode;
-                value.Polarity = Polarity;
-                return Trigger1Mode.FromPayload(MessageType, value);
-            });
+            return Harp.MultiPwm.Trigger1Mode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that trigger mode of input channel 1.
+    /// </summary>
+    [DisplayName("TimestampedTrigger1ModePayload")]
+    [Description("Creates a timestamped message payload that trigger mode of input channel 1.")]
+    public partial class CreateTimestampedTrigger1ModePayload : CreateTrigger1ModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that trigger mode of input channel 1.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Trigger1Mode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.Trigger1Mode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that trigger mode of input channel 2.
     /// </summary>
     [DisplayName("Trigger2ModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that trigger mode of input channel 2.")]
-    public partial class CreateTrigger2ModePayload : HarpCombinator
+    [Description("Creates a message payload that trigger mode of input channel 2.")]
+    public partial class CreateTrigger2ModePayload
     {
         /// <summary>
         /// Gets or sets a value that specifies the trigger mode.
@@ -6328,52 +6561,55 @@ namespace Harp.MultiPwm
         public TriggerPolarity Polarity { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that trigger mode of input channel 2.
+        /// Creates a message payload for the Trigger2Mode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public Trigger2ModePayload GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            Trigger2ModePayload value;
+            value.TriggerMode = TriggerMode;
+            value.Polarity = Polarity;
+            return value;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that trigger mode of input channel 2.
+        /// Creates a message that trigger mode of input channel 2.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Trigger2Mode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ =>
-            {
-                Trigger2ModePayload value;
-                value.TriggerMode = TriggerMode;
-                value.Polarity = Polarity;
-                return Trigger2Mode.FromPayload(MessageType, value);
-            });
+            return Harp.MultiPwm.Trigger2Mode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that trigger mode of input channel 2.
+    /// </summary>
+    [DisplayName("TimestampedTrigger2ModePayload")]
+    [Description("Creates a timestamped message payload that trigger mode of input channel 2.")]
+    public partial class CreateTimestampedTrigger2ModePayload : CreateTrigger2ModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that trigger mode of input channel 2.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Trigger2Mode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.Trigger2Mode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that trigger mode of input channel 3.
     /// </summary>
     [DisplayName("Trigger3ModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that trigger mode of input channel 3.")]
-    public partial class CreateTrigger3ModePayload : HarpCombinator
+    [Description("Creates a message payload that trigger mode of input channel 3.")]
+    public partial class CreateTrigger3ModePayload
     {
         /// <summary>
         /// Gets or sets a value that specifies the trigger mode.
@@ -6388,148 +6624,163 @@ namespace Harp.MultiPwm
         public TriggerPolarity Polarity { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that trigger mode of input channel 3.
+        /// Creates a message payload for the Trigger3Mode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public Trigger3ModePayload GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            Trigger3ModePayload value;
+            value.TriggerMode = TriggerMode;
+            value.Polarity = Polarity;
+            return value;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that trigger mode of input channel 3.
+        /// Creates a message that trigger mode of input channel 3.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the Trigger3Mode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ =>
-            {
-                Trigger3ModePayload value;
-                value.TriggerMode = TriggerMode;
-                value.Polarity = Polarity;
-                return Trigger3Mode.FromPayload(MessageType, value);
-            });
+            return Harp.MultiPwm.Trigger3Mode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that trigger mode of input channel 3.
+    /// </summary>
+    [DisplayName("TimestampedTrigger3ModePayload")]
+    [Description("Creates a timestamped message payload that trigger mode of input channel 3.")]
+    public partial class CreateTimestampedTrigger3ModePayload : CreateTrigger3ModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that trigger mode of input channel 3.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the Trigger3Mode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.Trigger3Mode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
     /// </summary>
     [DisplayName("RequestEnablePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.")]
-    public partial class CreateRequestEnablePayload : HarpCombinator
+    [Description("Creates a message payload that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.")]
+    public partial class CreateRequestEnablePayload
     {
         /// <summary>
         /// Gets or sets the value that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
         /// </summary>
         [Description("The value that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.")]
-        public PwmChannels Value { get; set; }
+        public PwmChannels RequestEnable { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
+        /// Creates a message payload for the RequestEnable register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return RequestEnable;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
+        /// Creates a message that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the RequestEnable register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => RequestEnable.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.RequestEnable.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
+    /// </summary>
+    [DisplayName("TimestampedRequestEnablePayload")]
+    [Description("Creates a timestamped message payload that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.")]
+    public partial class CreateTimestampedRequestEnablePayload : CreateRequestEnablePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that if set to Low, it will bypass the EnablePwmChannels and ArmPwmChannels register function.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the RequestEnable register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.RequestEnable.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that enable enable.
     /// </summary>
     [DisplayName("EnablePwmChannelsPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that enable enable.")]
-    public partial class CreateEnablePwmChannelsPayload : HarpCombinator
+    [Description("Creates a message payload that enable enable.")]
+    public partial class CreateEnablePwmChannelsPayload
     {
         /// <summary>
         /// Gets or sets the value that enable enable.
         /// </summary>
         [Description("The value that enable enable.")]
-        public PwmChannels Value { get; set; }
+        public PwmChannels EnablePwmChannels { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that enable enable.
+        /// Creates a message payload for the EnablePwmChannels register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return EnablePwmChannels;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that enable enable.
+        /// Creates a message that enable enable.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the EnablePwmChannels register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => EnablePwmChannels.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.EnablePwmChannels.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that enable enable.
+    /// </summary>
+    [DisplayName("TimestampedEnablePwmChannelsPayload")]
+    [Description("Creates a timestamped message payload that enable enable.")]
+    public partial class CreateTimestampedEnablePwmChannelsPayload : CreateEnablePwmChannelsPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that enable enable.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the EnablePwmChannels register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.EnablePwmChannels.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that when triggered, all channels will be affected by the event.
     /// </summary>
     [DisplayName("TriggerAllModePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that when triggered, all channels will be affected by the event.")]
-    public partial class CreateTriggerAllModePayload : HarpCombinator
+    [Description("Creates a message payload that when triggered, all channels will be affected by the event.")]
+    public partial class CreateTriggerAllModePayload
     {
         /// <summary>
         /// Gets or sets a value that specifies the trigger mode.
@@ -6544,233 +6795,261 @@ namespace Harp.MultiPwm
         public TriggerPolarity Polarity { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that when triggered, all channels will be affected by the event.
+        /// Creates a message payload for the TriggerAllMode register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public TriggerAllModePayload GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            TriggerAllModePayload value;
+            value.TriggerMode = TriggerMode;
+            value.Polarity = Polarity;
+            return value;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that when triggered, all channels will be affected by the event.
+        /// Creates a message that when triggered, all channels will be affected by the event.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the TriggerAllMode register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ =>
-            {
-                TriggerAllModePayload value;
-                value.TriggerMode = TriggerMode;
-                value.Polarity = Polarity;
-                return TriggerAllMode.FromPayload(MessageType, value);
-            });
+            return Harp.MultiPwm.TriggerAllMode.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that when triggered, all channels will be affected by the event.
+    /// </summary>
+    [DisplayName("TimestampedTriggerAllModePayload")]
+    [Description("Creates a timestamped message payload that when triggered, all channels will be affected by the event.")]
+    public partial class CreateTimestampedTriggerAllModePayload : CreateTriggerAllModePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that when triggered, all channels will be affected by the event.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the TriggerAllMode register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.TriggerAllMode.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that current state of all trigger channel inputs.
     /// </summary>
     [DisplayName("TriggerChannelStatePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that current state of all trigger channel inputs.")]
-    public partial class CreateTriggerChannelStatePayload : HarpCombinator
+    [Description("Creates a message payload that current state of all trigger channel inputs.")]
+    public partial class CreateTriggerChannelStatePayload
     {
         /// <summary>
         /// Gets or sets the value that current state of all trigger channel inputs.
         /// </summary>
         [Description("The value that current state of all trigger channel inputs.")]
-        public TriggerInput Value { get; set; }
+        public TriggerInput TriggerChannelState { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that current state of all trigger channel inputs.
+        /// Creates a message payload for the TriggerChannelState register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public TriggerInput GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return TriggerChannelState;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that current state of all trigger channel inputs.
+        /// Creates a message that current state of all trigger channel inputs.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the TriggerChannelState register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => TriggerChannelState.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.TriggerChannelState.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a timestamped message payload
+    /// that current state of all trigger channel inputs.
+    /// </summary>
+    [DisplayName("TimestampedTriggerChannelStatePayload")]
+    [Description("Creates a timestamped message payload that current state of all trigger channel inputs.")]
+    public partial class CreateTimestampedTriggerChannelStatePayload : CreateTriggerChannelStatePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that current state of all trigger channel inputs.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the TriggerChannelState register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.TriggerChannelState.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that current state of all PWM channel outputs.
     /// </summary>
     [DisplayName("PwmChannelStatePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that current state of all PWM channel outputs.")]
-    public partial class CreatePwmChannelStatePayload : HarpCombinator
+    [Description("Creates a message payload that current state of all PWM channel outputs.")]
+    public partial class CreatePwmChannelStatePayload
     {
         /// <summary>
         /// Gets or sets the value that current state of all PWM channel outputs.
         /// </summary>
         [Description("The value that current state of all PWM channel outputs.")]
-        public PwmChannels Value { get; set; }
+        public PwmChannels PwmChannelState { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that current state of all PWM channel outputs.
+        /// Creates a message payload for the PwmChannelState register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return PwmChannelState;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that current state of all PWM channel outputs.
+        /// Creates a message that current state of all PWM channel outputs.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmChannelState register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => PwmChannelState.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannelState.FromPayload(messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
-    /// that current state of the PWM execution.
+    /// Represents an operator that creates a timestamped message payload
+    /// that current state of all PWM channel outputs.
     /// </summary>
-    [DisplayName("PwmExecutionStatePayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that current state of the PWM execution.")]
-    public partial class CreatePwmExecutionStatePayload : HarpCombinator
+    [DisplayName("TimestampedPwmChannelStatePayload")]
+    [Description("Creates a timestamped message payload that current state of all PWM channel outputs.")]
+    public partial class CreateTimestampedPwmChannelStatePayload : CreatePwmChannelStatePayload
     {
         /// <summary>
-        /// Gets or sets the value that current state of the PWM execution.
+        /// Creates a timestamped message that current state of all PWM channel outputs.
         /// </summary>
-        [Description("The value that current state of the PWM execution.")]
-        public PwmChannels Value { get; set; }
-
-        /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that current state of the PWM execution.
-        /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmChannelState register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
-        }
-
-        /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that current state of the PWM execution.
-        /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
-        {
-            return source.Select(_ => PwmExecutionState.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.PwmChannelState.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
     /// <summary>
-    /// Represents an operator that creates a sequence of message payloads
+    /// Represents an operator that creates a message payload
+    /// that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.
+    /// </summary>
+    [DisplayName("PwmStatePayload")]
+    [Description("Creates a message payload that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.")]
+    public partial class CreatePwmStatePayload
+    {
+        /// <summary>
+        /// Gets or sets the value that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.
+        /// </summary>
+        [Description("The value that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.")]
+        public PwmChannels PwmState { get; set; }
+
+        /// <summary>
+        /// Creates a message payload for the PwmState register.
+        /// </summary>
+        /// <returns>The created message payload value.</returns>
+        public PwmChannels GetPayload()
+        {
+            return PwmState;
+        }
+
+        /// <summary>
+        /// Creates a message that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.
+        /// </summary>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the PwmState register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmState.FromPayload(messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a timestamped message payload
+    /// that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.
+    /// </summary>
+    [DisplayName("TimestampedPwmStatePayload")]
+    [Description("Creates a timestamped message payload that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.")]
+    public partial class CreateTimestampedPwmStatePayload : CreatePwmStatePayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that the state of the PWM for each channel. Emits an event each time a PMW starts or stops.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the PwmState register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.PwmState.FromPayload(timestamp, messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a message payload
     /// that enables the generation of events.
     /// </summary>
     [DisplayName("EnableEventsPayload")]
-    [WorkflowElementCategory(ElementCategory.Transform)]
-    [Description("Creates a sequence of message payloads that enables the generation of events.")]
-    public partial class CreateEnableEventsPayload : HarpCombinator
+    [Description("Creates a message payload that enables the generation of events.")]
+    public partial class CreateEnableEventsPayload
     {
         /// <summary>
         /// Gets or sets the value that enables the generation of events.
         /// </summary>
         [Description("The value that enables the generation of events.")]
-        public MultiPwmEvents Value { get; set; }
+        public MultiPwmEvents EnableEvents { get; set; }
 
         /// <summary>
-        /// Creates an observable sequence that contains a single message
-        /// that enables the generation of events.
+        /// Creates a message payload for the EnableEvents register.
         /// </summary>
-        /// <returns>
-        /// A sequence containing a single <see cref="HarpMessage"/> object
-        /// representing the created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process()
+        /// <returns>The created message payload value.</returns>
+        public MultiPwmEvents GetPayload()
         {
-            return Process(Observable.Return(System.Reactive.Unit.Default));
+            return EnableEvents;
         }
 
         /// <summary>
-        /// Creates an observable sequence of message payloads
-        /// that enables the generation of events.
+        /// Creates a message that enables the generation of events.
         /// </summary>
-        /// <typeparam name="TSource">
-        /// The type of the elements in the <paramref name="source"/> sequence.
-        /// </typeparam>
-        /// <param name="source">
-        /// The sequence containing the notifications used for emitting message payloads.
-        /// </param>
-        /// <returns>
-        /// A sequence of <see cref="HarpMessage"/> objects representing each
-        /// created message payload.
-        /// </returns>
-        public IObservable<HarpMessage> Process<TSource>(IObservable<TSource> source)
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new message for the EnableEvents register.</returns>
+        public HarpMessage GetMessage(MessageType messageType)
         {
-            return source.Select(_ => EnableEvents.FromPayload(MessageType, Value));
+            return Harp.MultiPwm.EnableEvents.FromPayload(messageType, GetPayload());
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that creates a timestamped message payload
+    /// that enables the generation of events.
+    /// </summary>
+    [DisplayName("TimestampedEnableEventsPayload")]
+    [Description("Creates a timestamped message payload that enables the generation of events.")]
+    public partial class CreateTimestampedEnableEventsPayload : CreateEnableEventsPayload
+    {
+        /// <summary>
+        /// Creates a timestamped message that enables the generation of events.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
+        /// <param name="messageType">Specifies the type of the created message.</param>
+        /// <returns>A new timestamped message for the EnableEvents register.</returns>
+        public HarpMessage GetMessage(double timestamp, MessageType messageType)
+        {
+            return Harp.MultiPwm.EnableEvents.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -6925,10 +7204,11 @@ namespace Harp.MultiPwm
     [Flags]
     public enum PwmChannels : byte
     {
-        Channel0 = 0x0,
-        Channel1 = 0x1,
-        Channel2 = 0x2,
-        Channel3 = 0x4
+        None = 0x0,
+        Channel0 = 0x1,
+        Channel1 = 0x2,
+        Channel2 = 0x4,
+        Channel3 = 0x8
     }
 
     /// <summary>
@@ -6937,10 +7217,11 @@ namespace Harp.MultiPwm
     [Flags]
     public enum TriggerInput : byte
     {
-        Channel0 = 0x0,
-        Channel1 = 0x1,
-        Channel2 = 0x2,
-        Channel3 = 0x4
+        None = 0x0,
+        Channel0 = 0x1,
+        Channel1 = 0x2,
+        Channel2 = 0x4,
+        Channel3 = 0x8
     }
 
     /// <summary>
@@ -6949,6 +7230,7 @@ namespace Harp.MultiPwm
     [Flags]
     public enum MultiPwmEvents : byte
     {
+        None = 0x0,
         Execution = 0x1
     }
 

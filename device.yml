@@ -98,7 +98,7 @@ registers:
     address: 52
     type: U8
     access: Write
-    maskType: PwmPlaybackMode
+    maskType: PlaybackMode
     description: Playback mode of channel 0.
   PwmChannel1PlaybackMode:
     <<: *pwmplayback
@@ -233,17 +233,17 @@ bitMasks:
   PwmChannels:
     description: Available PWM output channels.
     bits:
-      Channel0: 0x00
-      Channel1: 0x01
-      Channel2: 0x02
-      Channel3: 0x04
+      Channel0: 0x01
+      Channel1: 0x02
+      Channel2: 0x04
+      Channel3: 0x08
   TriggerInput:
     description: Available trigger input channels.
     bits:
-      Channel0: 0x00
-      Channel1: 0x01
-      Channel2: 0x02
-      Channel3: 0x04
+      Channel0: 0x01
+      Channel1: 0x02
+      Channel2: 0x04
+      Channel3: 0x08
   MultiPwmEvents:
     description: Available events that can be enabled/disabled.
     bits:
