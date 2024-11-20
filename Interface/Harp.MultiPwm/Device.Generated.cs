@@ -68,6 +68,7 @@ namespace Harp.MultiPwm
             { 60, typeof(StartSoftwareTrigger) },
             { 61, typeof(StopSoftwareTrigger) },
             { 62, typeof(ArmPwmChannels) },
+            { 63, typeof(Reserved0) },
             { 64, typeof(Trigger0Mode) },
             { 65, typeof(Trigger1Mode) },
             { 66, typeof(Trigger2Mode) },
@@ -80,6 +81,41 @@ namespace Harp.MultiPwm
             { 73, typeof(PwmState) },
             { 74, typeof(EnableEvents) }
         };
+
+        /// <summary>
+        /// Gets the contents of the metadata file describing the <see cref="MultiPwm"/>
+        /// device registers.
+        /// </summary>
+        public static readonly string Metadata = GetDeviceMetadata();
+
+        static string GetDeviceMetadata()
+        {
+            var deviceType = typeof(Device);
+            using var metadataStream = deviceType.Assembly.GetManifestResourceStream($"{deviceType.Namespace}.device.yml");
+            using var streamReader = new System.IO.StreamReader(metadataStream);
+            return streamReader.ReadToEnd();
+        }
+    }
+
+    /// <summary>
+    /// Represents an operator that returns the contents of the metadata file
+    /// describing the <see cref="MultiPwm"/> device registers.
+    /// </summary>
+    [Description("Returns the contents of the metadata file describing the MultiPwm device registers.")]
+    public partial class GetMetadata : Source<string>
+    {
+        /// <summary>
+        /// Returns an observable sequence with the contents of the metadata file
+        /// describing the <see cref="MultiPwm"/> device registers.
+        /// </summary>
+        /// <returns>
+        /// A sequence with a single <see cref="string"/> object representing the
+        /// contents of the metadata file.
+        /// </returns>
+        public override IObservable<string> Generate()
+        {
+            return Observable.Return(Device.Metadata);
+        }
     }
 
     /// <summary>
@@ -3439,6 +3475,28 @@ namespace Harp.MultiPwm
         {
             return ArmPwmChannels.GetTimestampedPayload(message);
         }
+    }
+
+    /// <summary>
+    /// Represents a register that reserved for future use.
+    /// </summary>
+    [Description("Reserved for future use.")]
+    internal partial class Reserved0
+    {
+        /// <summary>
+        /// Represents the address of the <see cref="Reserved0"/> register. This field is constant.
+        /// </summary>
+        public const int Address = 63;
+
+        /// <summary>
+        /// Represents the payload type of the <see cref="Reserved0"/> register. This field is constant.
+        /// </summary>
+        public const PayloadType RegisterType = PayloadType.U8;
+
+        /// <summary>
+        /// Represents the length of the <see cref="Reserved0"/> register. This field is constant.
+        /// </summary>
+        public const int RegisterLength = 1;
     }
 
     /// <summary>
@@ -7080,6 +7138,22 @@ namespace Harp.MultiPwm
         /// Specifies the polarity of the trigger signal.
         /// </summary>
         public TriggerPolarity Polarity;
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the payload of
+        /// the Trigger0Mode register.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the payload of the
+        /// Trigger0Mode register.
+        /// </returns>
+        public override string ToString()
+        {
+            return "Trigger0ModePayload { " +
+                "TriggerMode = " + TriggerMode + ", " +
+                "Polarity = " + Polarity + " " +
+            "}";
+        }
     }
 
     /// <summary>
@@ -7109,6 +7183,22 @@ namespace Harp.MultiPwm
         /// Specifies the polarity of the trigger signal.
         /// </summary>
         public TriggerPolarity Polarity;
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the payload of
+        /// the Trigger1Mode register.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the payload of the
+        /// Trigger1Mode register.
+        /// </returns>
+        public override string ToString()
+        {
+            return "Trigger1ModePayload { " +
+                "TriggerMode = " + TriggerMode + ", " +
+                "Polarity = " + Polarity + " " +
+            "}";
+        }
     }
 
     /// <summary>
@@ -7138,6 +7228,22 @@ namespace Harp.MultiPwm
         /// Specifies the polarity of the trigger signal.
         /// </summary>
         public TriggerPolarity Polarity;
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the payload of
+        /// the Trigger2Mode register.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the payload of the
+        /// Trigger2Mode register.
+        /// </returns>
+        public override string ToString()
+        {
+            return "Trigger2ModePayload { " +
+                "TriggerMode = " + TriggerMode + ", " +
+                "Polarity = " + Polarity + " " +
+            "}";
+        }
     }
 
     /// <summary>
@@ -7167,6 +7273,22 @@ namespace Harp.MultiPwm
         /// Specifies the polarity of the trigger signal.
         /// </summary>
         public TriggerPolarity Polarity;
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the payload of
+        /// the Trigger3Mode register.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the payload of the
+        /// Trigger3Mode register.
+        /// </returns>
+        public override string ToString()
+        {
+            return "Trigger3ModePayload { " +
+                "TriggerMode = " + TriggerMode + ", " +
+                "Polarity = " + Polarity + " " +
+            "}";
+        }
     }
 
     /// <summary>
@@ -7196,6 +7318,22 @@ namespace Harp.MultiPwm
         /// Specifies the polarity of the trigger signal.
         /// </summary>
         public TriggerPolarity Polarity;
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the payload of
+        /// the TriggerAllMode register.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/> that represents the payload of the
+        /// TriggerAllMode register.
+        /// </returns>
+        public override string ToString()
+        {
+            return "TriggerAllModePayload { " +
+                "TriggerMode = " + TriggerMode + ", " +
+                "Polarity = " + Polarity + " " +
+            "}";
+        }
     }
 
     /// <summary>
