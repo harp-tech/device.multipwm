@@ -414,7 +414,7 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmChannel0NumPulses register.
+        /// Asynchronously reads the contents of the PwmChannel0PulseCount register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -423,14 +423,14 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<uint> ReadPwmChannel0NumPulsesAsync(CancellationToken cancellationToken = default)
+        public async Task<uint> ReadPwmChannel0PulseCountAsync(CancellationToken cancellationToken = default)
         {
-            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel0NumPulses.Address), cancellationToken);
-            return PwmChannel0NumPulses.GetPayload(reply);
+            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel0PulseCount.Address), cancellationToken);
+            return PwmChannel0PulseCount.GetPayload(reply);
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmChannel0NumPulses register.
+        /// Asynchronously reads the timestamped contents of the PwmChannel0PulseCount register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -439,28 +439,28 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<uint>> ReadTimestampedPwmChannel0NumPulsesAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<uint>> ReadTimestampedPwmChannel0PulseCountAsync(CancellationToken cancellationToken = default)
         {
-            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel0NumPulses.Address), cancellationToken);
-            return PwmChannel0NumPulses.GetTimestampedPayload(reply);
+            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel0PulseCount.Address), cancellationToken);
+            return PwmChannel0PulseCount.GetTimestampedPayload(reply);
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmChannel0NumPulses register.
+        /// Asynchronously writes a value to the PwmChannel0PulseCount register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WritePwmChannel0NumPulsesAsync(uint value, CancellationToken cancellationToken = default)
+        public async Task WritePwmChannel0PulseCountAsync(uint value, CancellationToken cancellationToken = default)
         {
-            var request = PwmChannel0NumPulses.FromPayload(MessageType.Write, value);
+            var request = PwmChannel0PulseCount.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmChannel1NumPulses register.
+        /// Asynchronously reads the contents of the PwmChannel1PulseCount register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -469,14 +469,14 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<uint> ReadPwmChannel1NumPulsesAsync(CancellationToken cancellationToken = default)
+        public async Task<uint> ReadPwmChannel1PulseCountAsync(CancellationToken cancellationToken = default)
         {
-            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel1NumPulses.Address), cancellationToken);
-            return PwmChannel1NumPulses.GetPayload(reply);
+            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel1PulseCount.Address), cancellationToken);
+            return PwmChannel1PulseCount.GetPayload(reply);
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmChannel1NumPulses register.
+        /// Asynchronously reads the timestamped contents of the PwmChannel1PulseCount register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -485,28 +485,28 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<uint>> ReadTimestampedPwmChannel1NumPulsesAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<uint>> ReadTimestampedPwmChannel1PulseCountAsync(CancellationToken cancellationToken = default)
         {
-            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel1NumPulses.Address), cancellationToken);
-            return PwmChannel1NumPulses.GetTimestampedPayload(reply);
+            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel1PulseCount.Address), cancellationToken);
+            return PwmChannel1PulseCount.GetTimestampedPayload(reply);
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmChannel1NumPulses register.
+        /// Asynchronously writes a value to the PwmChannel1PulseCount register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WritePwmChannel1NumPulsesAsync(uint value, CancellationToken cancellationToken = default)
+        public async Task WritePwmChannel1PulseCountAsync(uint value, CancellationToken cancellationToken = default)
         {
-            var request = PwmChannel1NumPulses.FromPayload(MessageType.Write, value);
+            var request = PwmChannel1PulseCount.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmChannel2NumPulses register.
+        /// Asynchronously reads the contents of the PwmChannel2PulseCount register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -515,14 +515,14 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<uint> ReadPwmChannel2NumPulsesAsync(CancellationToken cancellationToken = default)
+        public async Task<uint> ReadPwmChannel2PulseCountAsync(CancellationToken cancellationToken = default)
         {
-            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel2NumPulses.Address), cancellationToken);
-            return PwmChannel2NumPulses.GetPayload(reply);
+            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel2PulseCount.Address), cancellationToken);
+            return PwmChannel2PulseCount.GetPayload(reply);
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmChannel2NumPulses register.
+        /// Asynchronously reads the timestamped contents of the PwmChannel2PulseCount register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -531,28 +531,28 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<uint>> ReadTimestampedPwmChannel2NumPulsesAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<uint>> ReadTimestampedPwmChannel2PulseCountAsync(CancellationToken cancellationToken = default)
         {
-            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel2NumPulses.Address), cancellationToken);
-            return PwmChannel2NumPulses.GetTimestampedPayload(reply);
+            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel2PulseCount.Address), cancellationToken);
+            return PwmChannel2PulseCount.GetTimestampedPayload(reply);
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmChannel2NumPulses register.
+        /// Asynchronously writes a value to the PwmChannel2PulseCount register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WritePwmChannel2NumPulsesAsync(uint value, CancellationToken cancellationToken = default)
+        public async Task WritePwmChannel2PulseCountAsync(uint value, CancellationToken cancellationToken = default)
         {
-            var request = PwmChannel2NumPulses.FromPayload(MessageType.Write, value);
+            var request = PwmChannel2PulseCount.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
         }
 
         /// <summary>
-        /// Asynchronously reads the contents of the PwmChannel3NumPulses register.
+        /// Asynchronously reads the contents of the PwmChannel3PulseCount register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -561,14 +561,14 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<uint> ReadPwmChannel3NumPulsesAsync(CancellationToken cancellationToken = default)
+        public async Task<uint> ReadPwmChannel3PulseCountAsync(CancellationToken cancellationToken = default)
         {
-            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel3NumPulses.Address), cancellationToken);
-            return PwmChannel3NumPulses.GetPayload(reply);
+            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel3PulseCount.Address), cancellationToken);
+            return PwmChannel3PulseCount.GetPayload(reply);
         }
 
         /// <summary>
-        /// Asynchronously reads the timestamped contents of the PwmChannel3NumPulses register.
+        /// Asynchronously reads the timestamped contents of the PwmChannel3PulseCount register.
         /// </summary>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
@@ -577,23 +577,23 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<uint>> ReadTimestampedPwmChannel3NumPulsesAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<uint>> ReadTimestampedPwmChannel3PulseCountAsync(CancellationToken cancellationToken = default)
         {
-            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel3NumPulses.Address), cancellationToken);
-            return PwmChannel3NumPulses.GetTimestampedPayload(reply);
+            var reply = await CommandAsync(HarpCommand.ReadUInt32(PwmChannel3PulseCount.Address), cancellationToken);
+            return PwmChannel3PulseCount.GetTimestampedPayload(reply);
         }
 
         /// <summary>
-        /// Asynchronously writes a value to the PwmChannel3NumPulses register.
+        /// Asynchronously writes a value to the PwmChannel3PulseCount register.
         /// </summary>
         /// <param name="value">The value to be stored in the register.</param>
         /// <param name="cancellationToken">
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WritePwmChannel3NumPulsesAsync(uint value, CancellationToken cancellationToken = default)
+        public async Task WritePwmChannel3PulseCountAsync(uint value, CancellationToken cancellationToken = default)
         {
-            var request = PwmChannel3NumPulses.FromPayload(MessageType.Write, value);
+            var request = PwmChannel3PulseCount.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
         }
 
@@ -1287,7 +1287,7 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<TriggerInput> ReadStartSoftwareTriggerAsync(CancellationToken cancellationToken = default)
+        public async Task<TriggerInputs> ReadStartSoftwareTriggerAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(StartSoftwareTrigger.Address), cancellationToken);
             return StartSoftwareTrigger.GetPayload(reply);
@@ -1303,7 +1303,7 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<TriggerInput>> ReadTimestampedStartSoftwareTriggerAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<TriggerInputs>> ReadTimestampedStartSoftwareTriggerAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(StartSoftwareTrigger.Address), cancellationToken);
             return StartSoftwareTrigger.GetTimestampedPayload(reply);
@@ -1317,7 +1317,7 @@ namespace Harp.MultiPwm
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WriteStartSoftwareTriggerAsync(TriggerInput value, CancellationToken cancellationToken = default)
+        public async Task WriteStartSoftwareTriggerAsync(TriggerInputs value, CancellationToken cancellationToken = default)
         {
             var request = StartSoftwareTrigger.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
@@ -1333,7 +1333,7 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<TriggerInput> ReadStopSoftwareTriggerAsync(CancellationToken cancellationToken = default)
+        public async Task<TriggerInputs> ReadStopSoftwareTriggerAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(StopSoftwareTrigger.Address), cancellationToken);
             return StopSoftwareTrigger.GetPayload(reply);
@@ -1349,7 +1349,7 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<TriggerInput>> ReadTimestampedStopSoftwareTriggerAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<TriggerInputs>> ReadTimestampedStopSoftwareTriggerAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(StopSoftwareTrigger.Address), cancellationToken);
             return StopSoftwareTrigger.GetTimestampedPayload(reply);
@@ -1363,7 +1363,7 @@ namespace Harp.MultiPwm
         /// A <see cref="CancellationToken"/> which can be used to cancel the operation.
         /// </param>
         /// <returns>The task object representing the asynchronous write operation.</returns>
-        public async Task WriteStopSoftwareTriggerAsync(TriggerInput value, CancellationToken cancellationToken = default)
+        public async Task WriteStopSoftwareTriggerAsync(TriggerInputs value, CancellationToken cancellationToken = default)
         {
             var request = StopSoftwareTrigger.FromPayload(MessageType.Write, value);
             await CommandAsync(request, cancellationToken);
@@ -1747,7 +1747,7 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the register payload.
         /// </returns>
-        public async Task<TriggerInput> ReadTriggerChannelStateAsync(CancellationToken cancellationToken = default)
+        public async Task<TriggerInputs> ReadTriggerChannelStateAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(TriggerChannelState.Address), cancellationToken);
             return TriggerChannelState.GetPayload(reply);
@@ -1763,7 +1763,7 @@ namespace Harp.MultiPwm
         /// A task that represents the asynchronous read operation. The <see cref="Task{TResult}.Result"/>
         /// property contains the timestamped register payload.
         /// </returns>
-        public async Task<Timestamped<TriggerInput>> ReadTimestampedTriggerChannelStateAsync(CancellationToken cancellationToken = default)
+        public async Task<Timestamped<TriggerInputs>> ReadTimestampedTriggerChannelStateAsync(CancellationToken cancellationToken = default)
         {
             var reply = await CommandAsync(HarpCommand.ReadByte(TriggerChannelState.Address), cancellationToken);
             return TriggerChannelState.GetTimestampedPayload(reply);

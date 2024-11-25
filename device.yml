@@ -43,20 +43,20 @@ registers:
     <<: *pwmduty
     address: 39
     description: Duty cycle (0-100) of PWM pulses in channel 3.
-  PwmChannel0NumPulses: &pwmnum
+  PwmChannel0PulseCount: &pwmnum
     address: 40
     type: U32
     access: Write
     description: Total number of pulses to be generated in channel 0.
-  PwmChannel1NumPulses:
+  PwmChannel1PulseCount:
     <<: *pwmnum
     address: 41
     description: Total number of pulses to be generated in channel 1.
-  PwmChannel2NumPulses:
+  PwmChannel2PulseCount:
     <<: *pwmnum
     address: 42
     description: Total number of pulses to be generated in channel 2.
-  PwmChannel3NumPulses:
+  PwmChannel3PulseCount:
     <<: *pwmnum
     address: 43
     description: Total number of pulses to be generated in channel 3.
@@ -134,12 +134,12 @@ registers:
     address: 60
     type: U8
     access: Write
-    maskType: TriggerInput
+    maskType: TriggerInputs
     description: Emits a start software-trigger on the channels specified in the mask.
   StopSoftwareTrigger:
     <<: *softtrigger
     address: 61
-    maskType: TriggerInput
+    maskType: TriggerInputs
     description: Emits a stop software-trigger on the channels specified in the mask.
   ArmPwmChannels:
     address: 62
@@ -209,7 +209,7 @@ registers:
     address: 71
     type: U8
     access: Read
-    maskType: TriggerInput
+    maskType: TriggerInputs
     description: Current state of all trigger channel inputs.
   PwmChannelState:
     address: 72
@@ -237,7 +237,7 @@ bitMasks:
       Channel1: 0x02
       Channel2: 0x04
       Channel3: 0x08
-  TriggerInput:
+  TriggerInputs:
     description: Available trigger input channels.
     bits:
       Channel0: 0x01
