@@ -45,10 +45,10 @@ namespace Harp.MultiPwm
             { 37, typeof(PwmChannel1DutyCycle) },
             { 38, typeof(PwmChannel2DutyCycle) },
             { 39, typeof(PwmChannel3DutyCycle) },
-            { 40, typeof(PwmChannel0NumPulses) },
-            { 41, typeof(PwmChannel1NumPulses) },
-            { 42, typeof(PwmChannel2NumPulses) },
-            { 43, typeof(PwmChannel3NumPulses) },
+            { 40, typeof(PwmChannel0PulseCount) },
+            { 41, typeof(PwmChannel1PulseCount) },
+            { 42, typeof(PwmChannel2PulseCount) },
+            { 43, typeof(PwmChannel3PulseCount) },
             { 44, typeof(PwmChannel0RealFrequency) },
             { 45, typeof(PwmChannel1RealFrequency) },
             { 46, typeof(PwmChannel2RealFrequency) },
@@ -151,10 +151,10 @@ namespace Harp.MultiPwm
     /// <seealso cref="PwmChannel1DutyCycle"/>
     /// <seealso cref="PwmChannel2DutyCycle"/>
     /// <seealso cref="PwmChannel3DutyCycle"/>
-    /// <seealso cref="PwmChannel0NumPulses"/>
-    /// <seealso cref="PwmChannel1NumPulses"/>
-    /// <seealso cref="PwmChannel2NumPulses"/>
-    /// <seealso cref="PwmChannel3NumPulses"/>
+    /// <seealso cref="PwmChannel0PulseCount"/>
+    /// <seealso cref="PwmChannel1PulseCount"/>
+    /// <seealso cref="PwmChannel2PulseCount"/>
+    /// <seealso cref="PwmChannel3PulseCount"/>
     /// <seealso cref="PwmChannel0RealFrequency"/>
     /// <seealso cref="PwmChannel1RealFrequency"/>
     /// <seealso cref="PwmChannel2RealFrequency"/>
@@ -193,10 +193,10 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(PwmChannel1DutyCycle))]
     [XmlInclude(typeof(PwmChannel2DutyCycle))]
     [XmlInclude(typeof(PwmChannel3DutyCycle))]
-    [XmlInclude(typeof(PwmChannel0NumPulses))]
-    [XmlInclude(typeof(PwmChannel1NumPulses))]
-    [XmlInclude(typeof(PwmChannel2NumPulses))]
-    [XmlInclude(typeof(PwmChannel3NumPulses))]
+    [XmlInclude(typeof(PwmChannel0PulseCount))]
+    [XmlInclude(typeof(PwmChannel1PulseCount))]
+    [XmlInclude(typeof(PwmChannel2PulseCount))]
+    [XmlInclude(typeof(PwmChannel3PulseCount))]
     [XmlInclude(typeof(PwmChannel0RealFrequency))]
     [XmlInclude(typeof(PwmChannel1RealFrequency))]
     [XmlInclude(typeof(PwmChannel2RealFrequency))]
@@ -256,10 +256,10 @@ namespace Harp.MultiPwm
     /// <seealso cref="PwmChannel1DutyCycle"/>
     /// <seealso cref="PwmChannel2DutyCycle"/>
     /// <seealso cref="PwmChannel3DutyCycle"/>
-    /// <seealso cref="PwmChannel0NumPulses"/>
-    /// <seealso cref="PwmChannel1NumPulses"/>
-    /// <seealso cref="PwmChannel2NumPulses"/>
-    /// <seealso cref="PwmChannel3NumPulses"/>
+    /// <seealso cref="PwmChannel0PulseCount"/>
+    /// <seealso cref="PwmChannel1PulseCount"/>
+    /// <seealso cref="PwmChannel2PulseCount"/>
+    /// <seealso cref="PwmChannel3PulseCount"/>
     /// <seealso cref="PwmChannel0RealFrequency"/>
     /// <seealso cref="PwmChannel1RealFrequency"/>
     /// <seealso cref="PwmChannel2RealFrequency"/>
@@ -298,10 +298,10 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(PwmChannel1DutyCycle))]
     [XmlInclude(typeof(PwmChannel2DutyCycle))]
     [XmlInclude(typeof(PwmChannel3DutyCycle))]
-    [XmlInclude(typeof(PwmChannel0NumPulses))]
-    [XmlInclude(typeof(PwmChannel1NumPulses))]
-    [XmlInclude(typeof(PwmChannel2NumPulses))]
-    [XmlInclude(typeof(PwmChannel3NumPulses))]
+    [XmlInclude(typeof(PwmChannel0PulseCount))]
+    [XmlInclude(typeof(PwmChannel1PulseCount))]
+    [XmlInclude(typeof(PwmChannel2PulseCount))]
+    [XmlInclude(typeof(PwmChannel3PulseCount))]
     [XmlInclude(typeof(PwmChannel0RealFrequency))]
     [XmlInclude(typeof(PwmChannel1RealFrequency))]
     [XmlInclude(typeof(PwmChannel2RealFrequency))]
@@ -340,10 +340,10 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(TimestampedPwmChannel1DutyCycle))]
     [XmlInclude(typeof(TimestampedPwmChannel2DutyCycle))]
     [XmlInclude(typeof(TimestampedPwmChannel3DutyCycle))]
-    [XmlInclude(typeof(TimestampedPwmChannel0NumPulses))]
-    [XmlInclude(typeof(TimestampedPwmChannel1NumPulses))]
-    [XmlInclude(typeof(TimestampedPwmChannel2NumPulses))]
-    [XmlInclude(typeof(TimestampedPwmChannel3NumPulses))]
+    [XmlInclude(typeof(TimestampedPwmChannel0PulseCount))]
+    [XmlInclude(typeof(TimestampedPwmChannel1PulseCount))]
+    [XmlInclude(typeof(TimestampedPwmChannel2PulseCount))]
+    [XmlInclude(typeof(TimestampedPwmChannel3PulseCount))]
     [XmlInclude(typeof(TimestampedPwmChannel0RealFrequency))]
     [XmlInclude(typeof(TimestampedPwmChannel1RealFrequency))]
     [XmlInclude(typeof(TimestampedPwmChannel2RealFrequency))]
@@ -400,10 +400,10 @@ namespace Harp.MultiPwm
     /// <seealso cref="PwmChannel1DutyCycle"/>
     /// <seealso cref="PwmChannel2DutyCycle"/>
     /// <seealso cref="PwmChannel3DutyCycle"/>
-    /// <seealso cref="PwmChannel0NumPulses"/>
-    /// <seealso cref="PwmChannel1NumPulses"/>
-    /// <seealso cref="PwmChannel2NumPulses"/>
-    /// <seealso cref="PwmChannel3NumPulses"/>
+    /// <seealso cref="PwmChannel0PulseCount"/>
+    /// <seealso cref="PwmChannel1PulseCount"/>
+    /// <seealso cref="PwmChannel2PulseCount"/>
+    /// <seealso cref="PwmChannel3PulseCount"/>
     /// <seealso cref="PwmChannel0RealFrequency"/>
     /// <seealso cref="PwmChannel1RealFrequency"/>
     /// <seealso cref="PwmChannel2RealFrequency"/>
@@ -442,10 +442,10 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(PwmChannel1DutyCycle))]
     [XmlInclude(typeof(PwmChannel2DutyCycle))]
     [XmlInclude(typeof(PwmChannel3DutyCycle))]
-    [XmlInclude(typeof(PwmChannel0NumPulses))]
-    [XmlInclude(typeof(PwmChannel1NumPulses))]
-    [XmlInclude(typeof(PwmChannel2NumPulses))]
-    [XmlInclude(typeof(PwmChannel3NumPulses))]
+    [XmlInclude(typeof(PwmChannel0PulseCount))]
+    [XmlInclude(typeof(PwmChannel1PulseCount))]
+    [XmlInclude(typeof(PwmChannel2PulseCount))]
+    [XmlInclude(typeof(PwmChannel3PulseCount))]
     [XmlInclude(typeof(PwmChannel0RealFrequency))]
     [XmlInclude(typeof(PwmChannel1RealFrequency))]
     [XmlInclude(typeof(PwmChannel2RealFrequency))]
@@ -1262,25 +1262,25 @@ namespace Harp.MultiPwm
     /// Represents a register that total number of pulses to be generated in channel 0.
     /// </summary>
     [Description("Total number of pulses to be generated in channel 0.")]
-    public partial class PwmChannel0NumPulses
+    public partial class PwmChannel0PulseCount
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmChannel0NumPulses"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmChannel0PulseCount"/> register. This field is constant.
         /// </summary>
         public const int Address = 40;
 
         /// <summary>
-        /// Represents the payload type of the <see cref="PwmChannel0NumPulses"/> register. This field is constant.
+        /// Represents the payload type of the <see cref="PwmChannel0PulseCount"/> register. This field is constant.
         /// </summary>
         public const PayloadType RegisterType = PayloadType.U32;
 
         /// <summary>
-        /// Represents the length of the <see cref="PwmChannel0NumPulses"/> register. This field is constant.
+        /// Represents the length of the <see cref="PwmChannel0PulseCount"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
 
         /// <summary>
-        /// Returns the payload data for <see cref="PwmChannel0NumPulses"/> register messages.
+        /// Returns the payload data for <see cref="PwmChannel0PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
@@ -1290,7 +1290,7 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns the timestamped payload data for <see cref="PwmChannel0NumPulses"/> register messages.
+        /// Returns the timestamped payload data for <see cref="PwmChannel0PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
@@ -1300,12 +1300,12 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a Harp message for the <see cref="PwmChannel0NumPulses"/> register.
+        /// Returns a Harp message for the <see cref="PwmChannel0PulseCount"/> register.
         /// </summary>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel0NumPulses"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel0PulseCount"/> register
         /// with the specified message type and payload.
         /// </returns>
         public static HarpMessage FromPayload(MessageType messageType, uint value)
@@ -1314,14 +1314,14 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a timestamped Harp message for the <see cref="PwmChannel0NumPulses"/>
+        /// Returns a timestamped Harp message for the <see cref="PwmChannel0PulseCount"/>
         /// register.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel0NumPulses"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel0PulseCount"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
         public static HarpMessage FromPayload(double timestamp, MessageType messageType, uint value)
@@ -1332,25 +1332,25 @@ namespace Harp.MultiPwm
 
     /// <summary>
     /// Provides methods for manipulating timestamped messages from the
-    /// PwmChannel0NumPulses register.
+    /// PwmChannel0PulseCount register.
     /// </summary>
-    /// <seealso cref="PwmChannel0NumPulses"/>
-    [Description("Filters and selects timestamped messages from the PwmChannel0NumPulses register.")]
-    public partial class TimestampedPwmChannel0NumPulses
+    /// <seealso cref="PwmChannel0PulseCount"/>
+    [Description("Filters and selects timestamped messages from the PwmChannel0PulseCount register.")]
+    public partial class TimestampedPwmChannel0PulseCount
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmChannel0NumPulses"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmChannel0PulseCount"/> register. This field is constant.
         /// </summary>
-        public const int Address = PwmChannel0NumPulses.Address;
+        public const int Address = PwmChannel0PulseCount.Address;
 
         /// <summary>
-        /// Returns timestamped payload data for <see cref="PwmChannel0NumPulses"/> register messages.
+        /// Returns timestamped payload data for <see cref="PwmChannel0PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
         public static Timestamped<uint> GetPayload(HarpMessage message)
         {
-            return PwmChannel0NumPulses.GetTimestampedPayload(message);
+            return PwmChannel0PulseCount.GetTimestampedPayload(message);
         }
     }
 
@@ -1358,25 +1358,25 @@ namespace Harp.MultiPwm
     /// Represents a register that total number of pulses to be generated in channel 1.
     /// </summary>
     [Description("Total number of pulses to be generated in channel 1.")]
-    public partial class PwmChannel1NumPulses
+    public partial class PwmChannel1PulseCount
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmChannel1NumPulses"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmChannel1PulseCount"/> register. This field is constant.
         /// </summary>
         public const int Address = 41;
 
         /// <summary>
-        /// Represents the payload type of the <see cref="PwmChannel1NumPulses"/> register. This field is constant.
+        /// Represents the payload type of the <see cref="PwmChannel1PulseCount"/> register. This field is constant.
         /// </summary>
         public const PayloadType RegisterType = PayloadType.U32;
 
         /// <summary>
-        /// Represents the length of the <see cref="PwmChannel1NumPulses"/> register. This field is constant.
+        /// Represents the length of the <see cref="PwmChannel1PulseCount"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
 
         /// <summary>
-        /// Returns the payload data for <see cref="PwmChannel1NumPulses"/> register messages.
+        /// Returns the payload data for <see cref="PwmChannel1PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
@@ -1386,7 +1386,7 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns the timestamped payload data for <see cref="PwmChannel1NumPulses"/> register messages.
+        /// Returns the timestamped payload data for <see cref="PwmChannel1PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
@@ -1396,12 +1396,12 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a Harp message for the <see cref="PwmChannel1NumPulses"/> register.
+        /// Returns a Harp message for the <see cref="PwmChannel1PulseCount"/> register.
         /// </summary>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel1NumPulses"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel1PulseCount"/> register
         /// with the specified message type and payload.
         /// </returns>
         public static HarpMessage FromPayload(MessageType messageType, uint value)
@@ -1410,14 +1410,14 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a timestamped Harp message for the <see cref="PwmChannel1NumPulses"/>
+        /// Returns a timestamped Harp message for the <see cref="PwmChannel1PulseCount"/>
         /// register.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel1NumPulses"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel1PulseCount"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
         public static HarpMessage FromPayload(double timestamp, MessageType messageType, uint value)
@@ -1428,25 +1428,25 @@ namespace Harp.MultiPwm
 
     /// <summary>
     /// Provides methods for manipulating timestamped messages from the
-    /// PwmChannel1NumPulses register.
+    /// PwmChannel1PulseCount register.
     /// </summary>
-    /// <seealso cref="PwmChannel1NumPulses"/>
-    [Description("Filters and selects timestamped messages from the PwmChannel1NumPulses register.")]
-    public partial class TimestampedPwmChannel1NumPulses
+    /// <seealso cref="PwmChannel1PulseCount"/>
+    [Description("Filters and selects timestamped messages from the PwmChannel1PulseCount register.")]
+    public partial class TimestampedPwmChannel1PulseCount
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmChannel1NumPulses"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmChannel1PulseCount"/> register. This field is constant.
         /// </summary>
-        public const int Address = PwmChannel1NumPulses.Address;
+        public const int Address = PwmChannel1PulseCount.Address;
 
         /// <summary>
-        /// Returns timestamped payload data for <see cref="PwmChannel1NumPulses"/> register messages.
+        /// Returns timestamped payload data for <see cref="PwmChannel1PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
         public static Timestamped<uint> GetPayload(HarpMessage message)
         {
-            return PwmChannel1NumPulses.GetTimestampedPayload(message);
+            return PwmChannel1PulseCount.GetTimestampedPayload(message);
         }
     }
 
@@ -1454,25 +1454,25 @@ namespace Harp.MultiPwm
     /// Represents a register that total number of pulses to be generated in channel 2.
     /// </summary>
     [Description("Total number of pulses to be generated in channel 2.")]
-    public partial class PwmChannel2NumPulses
+    public partial class PwmChannel2PulseCount
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmChannel2NumPulses"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmChannel2PulseCount"/> register. This field is constant.
         /// </summary>
         public const int Address = 42;
 
         /// <summary>
-        /// Represents the payload type of the <see cref="PwmChannel2NumPulses"/> register. This field is constant.
+        /// Represents the payload type of the <see cref="PwmChannel2PulseCount"/> register. This field is constant.
         /// </summary>
         public const PayloadType RegisterType = PayloadType.U32;
 
         /// <summary>
-        /// Represents the length of the <see cref="PwmChannel2NumPulses"/> register. This field is constant.
+        /// Represents the length of the <see cref="PwmChannel2PulseCount"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
 
         /// <summary>
-        /// Returns the payload data for <see cref="PwmChannel2NumPulses"/> register messages.
+        /// Returns the payload data for <see cref="PwmChannel2PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
@@ -1482,7 +1482,7 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns the timestamped payload data for <see cref="PwmChannel2NumPulses"/> register messages.
+        /// Returns the timestamped payload data for <see cref="PwmChannel2PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
@@ -1492,12 +1492,12 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a Harp message for the <see cref="PwmChannel2NumPulses"/> register.
+        /// Returns a Harp message for the <see cref="PwmChannel2PulseCount"/> register.
         /// </summary>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel2NumPulses"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel2PulseCount"/> register
         /// with the specified message type and payload.
         /// </returns>
         public static HarpMessage FromPayload(MessageType messageType, uint value)
@@ -1506,14 +1506,14 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a timestamped Harp message for the <see cref="PwmChannel2NumPulses"/>
+        /// Returns a timestamped Harp message for the <see cref="PwmChannel2PulseCount"/>
         /// register.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel2NumPulses"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel2PulseCount"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
         public static HarpMessage FromPayload(double timestamp, MessageType messageType, uint value)
@@ -1524,25 +1524,25 @@ namespace Harp.MultiPwm
 
     /// <summary>
     /// Provides methods for manipulating timestamped messages from the
-    /// PwmChannel2NumPulses register.
+    /// PwmChannel2PulseCount register.
     /// </summary>
-    /// <seealso cref="PwmChannel2NumPulses"/>
-    [Description("Filters and selects timestamped messages from the PwmChannel2NumPulses register.")]
-    public partial class TimestampedPwmChannel2NumPulses
+    /// <seealso cref="PwmChannel2PulseCount"/>
+    [Description("Filters and selects timestamped messages from the PwmChannel2PulseCount register.")]
+    public partial class TimestampedPwmChannel2PulseCount
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmChannel2NumPulses"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmChannel2PulseCount"/> register. This field is constant.
         /// </summary>
-        public const int Address = PwmChannel2NumPulses.Address;
+        public const int Address = PwmChannel2PulseCount.Address;
 
         /// <summary>
-        /// Returns timestamped payload data for <see cref="PwmChannel2NumPulses"/> register messages.
+        /// Returns timestamped payload data for <see cref="PwmChannel2PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
         public static Timestamped<uint> GetPayload(HarpMessage message)
         {
-            return PwmChannel2NumPulses.GetTimestampedPayload(message);
+            return PwmChannel2PulseCount.GetTimestampedPayload(message);
         }
     }
 
@@ -1550,25 +1550,25 @@ namespace Harp.MultiPwm
     /// Represents a register that total number of pulses to be generated in channel 3.
     /// </summary>
     [Description("Total number of pulses to be generated in channel 3.")]
-    public partial class PwmChannel3NumPulses
+    public partial class PwmChannel3PulseCount
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmChannel3NumPulses"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmChannel3PulseCount"/> register. This field is constant.
         /// </summary>
         public const int Address = 43;
 
         /// <summary>
-        /// Represents the payload type of the <see cref="PwmChannel3NumPulses"/> register. This field is constant.
+        /// Represents the payload type of the <see cref="PwmChannel3PulseCount"/> register. This field is constant.
         /// </summary>
         public const PayloadType RegisterType = PayloadType.U32;
 
         /// <summary>
-        /// Represents the length of the <see cref="PwmChannel3NumPulses"/> register. This field is constant.
+        /// Represents the length of the <see cref="PwmChannel3PulseCount"/> register. This field is constant.
         /// </summary>
         public const int RegisterLength = 1;
 
         /// <summary>
-        /// Returns the payload data for <see cref="PwmChannel3NumPulses"/> register messages.
+        /// Returns the payload data for <see cref="PwmChannel3PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
@@ -1578,7 +1578,7 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns the timestamped payload data for <see cref="PwmChannel3NumPulses"/> register messages.
+        /// Returns the timestamped payload data for <see cref="PwmChannel3PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
@@ -1588,12 +1588,12 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a Harp message for the <see cref="PwmChannel3NumPulses"/> register.
+        /// Returns a Harp message for the <see cref="PwmChannel3PulseCount"/> register.
         /// </summary>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel3NumPulses"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel3PulseCount"/> register
         /// with the specified message type and payload.
         /// </returns>
         public static HarpMessage FromPayload(MessageType messageType, uint value)
@@ -1602,14 +1602,14 @@ namespace Harp.MultiPwm
         }
 
         /// <summary>
-        /// Returns a timestamped Harp message for the <see cref="PwmChannel3NumPulses"/>
+        /// Returns a timestamped Harp message for the <see cref="PwmChannel3PulseCount"/>
         /// register.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">The type of the Harp message.</param>
         /// <param name="value">The value to be stored in the message payload.</param>
         /// <returns>
-        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel3NumPulses"/> register
+        /// A <see cref="HarpMessage"/> object for the <see cref="PwmChannel3PulseCount"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
         public static HarpMessage FromPayload(double timestamp, MessageType messageType, uint value)
@@ -1620,25 +1620,25 @@ namespace Harp.MultiPwm
 
     /// <summary>
     /// Provides methods for manipulating timestamped messages from the
-    /// PwmChannel3NumPulses register.
+    /// PwmChannel3PulseCount register.
     /// </summary>
-    /// <seealso cref="PwmChannel3NumPulses"/>
-    [Description("Filters and selects timestamped messages from the PwmChannel3NumPulses register.")]
-    public partial class TimestampedPwmChannel3NumPulses
+    /// <seealso cref="PwmChannel3PulseCount"/>
+    [Description("Filters and selects timestamped messages from the PwmChannel3PulseCount register.")]
+    public partial class TimestampedPwmChannel3PulseCount
     {
         /// <summary>
-        /// Represents the address of the <see cref="PwmChannel3NumPulses"/> register. This field is constant.
+        /// Represents the address of the <see cref="PwmChannel3PulseCount"/> register. This field is constant.
         /// </summary>
-        public const int Address = PwmChannel3NumPulses.Address;
+        public const int Address = PwmChannel3PulseCount.Address;
 
         /// <summary>
-        /// Returns timestamped payload data for <see cref="PwmChannel3NumPulses"/> register messages.
+        /// Returns timestamped payload data for <see cref="PwmChannel3PulseCount"/> register messages.
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
         public static Timestamped<uint> GetPayload(HarpMessage message)
         {
-            return PwmChannel3NumPulses.GetTimestampedPayload(message);
+            return PwmChannel3PulseCount.GetTimestampedPayload(message);
         }
     }
 
@@ -3212,9 +3212,9 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static TriggerInput GetPayload(HarpMessage message)
+        public static TriggerInputs GetPayload(HarpMessage message)
         {
-            return (TriggerInput)message.GetPayloadByte();
+            return (TriggerInputs)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -3222,10 +3222,10 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<TriggerInput> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<TriggerInputs> GetTimestampedPayload(HarpMessage message)
         {
             var payload = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((TriggerInput)payload.Value, payload.Seconds);
+            return Timestamped.Create((TriggerInputs)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -3237,7 +3237,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="StartSoftwareTrigger"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, TriggerInput value)
+        public static HarpMessage FromPayload(MessageType messageType, TriggerInputs value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -3253,7 +3253,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="StartSoftwareTrigger"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, TriggerInput value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, TriggerInputs value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -3277,7 +3277,7 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<TriggerInput> GetPayload(HarpMessage message)
+        public static Timestamped<TriggerInputs> GetPayload(HarpMessage message)
         {
             return StartSoftwareTrigger.GetTimestampedPayload(message);
         }
@@ -3309,9 +3309,9 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static TriggerInput GetPayload(HarpMessage message)
+        public static TriggerInputs GetPayload(HarpMessage message)
         {
-            return (TriggerInput)message.GetPayloadByte();
+            return (TriggerInputs)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -3319,10 +3319,10 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<TriggerInput> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<TriggerInputs> GetTimestampedPayload(HarpMessage message)
         {
             var payload = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((TriggerInput)payload.Value, payload.Seconds);
+            return Timestamped.Create((TriggerInputs)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -3334,7 +3334,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="StopSoftwareTrigger"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, TriggerInput value)
+        public static HarpMessage FromPayload(MessageType messageType, TriggerInputs value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -3350,7 +3350,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="StopSoftwareTrigger"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, TriggerInput value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, TriggerInputs value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -3374,7 +3374,7 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<TriggerInput> GetPayload(HarpMessage message)
+        public static Timestamped<TriggerInputs> GetPayload(HarpMessage message)
         {
             return StopSoftwareTrigger.GetTimestampedPayload(message);
         }
@@ -4284,9 +4284,9 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the message payload.</returns>
-        public static TriggerInput GetPayload(HarpMessage message)
+        public static TriggerInputs GetPayload(HarpMessage message)
         {
-            return (TriggerInput)message.GetPayloadByte();
+            return (TriggerInputs)message.GetPayloadByte();
         }
 
         /// <summary>
@@ -4294,10 +4294,10 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<TriggerInput> GetTimestampedPayload(HarpMessage message)
+        public static Timestamped<TriggerInputs> GetTimestampedPayload(HarpMessage message)
         {
             var payload = message.GetTimestampedPayloadByte();
-            return Timestamped.Create((TriggerInput)payload.Value, payload.Seconds);
+            return Timestamped.Create((TriggerInputs)payload.Value, payload.Seconds);
         }
 
         /// <summary>
@@ -4309,7 +4309,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="TriggerChannelState"/> register
         /// with the specified message type and payload.
         /// </returns>
-        public static HarpMessage FromPayload(MessageType messageType, TriggerInput value)
+        public static HarpMessage FromPayload(MessageType messageType, TriggerInputs value)
         {
             return HarpMessage.FromByte(Address, messageType, (byte)value);
         }
@@ -4325,7 +4325,7 @@ namespace Harp.MultiPwm
         /// A <see cref="HarpMessage"/> object for the <see cref="TriggerChannelState"/> register
         /// with the specified message type, timestamp, and payload.
         /// </returns>
-        public static HarpMessage FromPayload(double timestamp, MessageType messageType, TriggerInput value)
+        public static HarpMessage FromPayload(double timestamp, MessageType messageType, TriggerInputs value)
         {
             return HarpMessage.FromByte(Address, timestamp, messageType, (byte)value);
         }
@@ -4349,7 +4349,7 @@ namespace Harp.MultiPwm
         /// </summary>
         /// <param name="message">A <see cref="HarpMessage"/> object representing the register message.</param>
         /// <returns>A value representing the timestamped message payload.</returns>
-        public static Timestamped<TriggerInput> GetPayload(HarpMessage message)
+        public static Timestamped<TriggerInputs> GetPayload(HarpMessage message)
         {
             return TriggerChannelState.GetTimestampedPayload(message);
         }
@@ -4658,10 +4658,10 @@ namespace Harp.MultiPwm
     /// <seealso cref="CreatePwmChannel1DutyCyclePayload"/>
     /// <seealso cref="CreatePwmChannel2DutyCyclePayload"/>
     /// <seealso cref="CreatePwmChannel3DutyCyclePayload"/>
-    /// <seealso cref="CreatePwmChannel0NumPulsesPayload"/>
-    /// <seealso cref="CreatePwmChannel1NumPulsesPayload"/>
-    /// <seealso cref="CreatePwmChannel2NumPulsesPayload"/>
-    /// <seealso cref="CreatePwmChannel3NumPulsesPayload"/>
+    /// <seealso cref="CreatePwmChannel0PulseCountPayload"/>
+    /// <seealso cref="CreatePwmChannel1PulseCountPayload"/>
+    /// <seealso cref="CreatePwmChannel2PulseCountPayload"/>
+    /// <seealso cref="CreatePwmChannel3PulseCountPayload"/>
     /// <seealso cref="CreatePwmChannel0RealFrequencyPayload"/>
     /// <seealso cref="CreatePwmChannel1RealFrequencyPayload"/>
     /// <seealso cref="CreatePwmChannel2RealFrequencyPayload"/>
@@ -4700,10 +4700,10 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(CreatePwmChannel1DutyCyclePayload))]
     [XmlInclude(typeof(CreatePwmChannel2DutyCyclePayload))]
     [XmlInclude(typeof(CreatePwmChannel3DutyCyclePayload))]
-    [XmlInclude(typeof(CreatePwmChannel0NumPulsesPayload))]
-    [XmlInclude(typeof(CreatePwmChannel1NumPulsesPayload))]
-    [XmlInclude(typeof(CreatePwmChannel2NumPulsesPayload))]
-    [XmlInclude(typeof(CreatePwmChannel3NumPulsesPayload))]
+    [XmlInclude(typeof(CreatePwmChannel0PulseCountPayload))]
+    [XmlInclude(typeof(CreatePwmChannel1PulseCountPayload))]
+    [XmlInclude(typeof(CreatePwmChannel2PulseCountPayload))]
+    [XmlInclude(typeof(CreatePwmChannel3PulseCountPayload))]
     [XmlInclude(typeof(CreatePwmChannel0RealFrequencyPayload))]
     [XmlInclude(typeof(CreatePwmChannel1RealFrequencyPayload))]
     [XmlInclude(typeof(CreatePwmChannel2RealFrequencyPayload))]
@@ -4742,10 +4742,10 @@ namespace Harp.MultiPwm
     [XmlInclude(typeof(CreateTimestampedPwmChannel1DutyCyclePayload))]
     [XmlInclude(typeof(CreateTimestampedPwmChannel2DutyCyclePayload))]
     [XmlInclude(typeof(CreateTimestampedPwmChannel3DutyCyclePayload))]
-    [XmlInclude(typeof(CreateTimestampedPwmChannel0NumPulsesPayload))]
-    [XmlInclude(typeof(CreateTimestampedPwmChannel1NumPulsesPayload))]
-    [XmlInclude(typeof(CreateTimestampedPwmChannel2NumPulsesPayload))]
-    [XmlInclude(typeof(CreateTimestampedPwmChannel3NumPulsesPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel0PulseCountPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel1PulseCountPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel2PulseCountPayload))]
+    [XmlInclude(typeof(CreateTimestampedPwmChannel3PulseCountPayload))]
     [XmlInclude(typeof(CreateTimestampedPwmChannel0RealFrequencyPayload))]
     [XmlInclude(typeof(CreateTimestampedPwmChannel1RealFrequencyPayload))]
     [XmlInclude(typeof(CreateTimestampedPwmChannel2RealFrequencyPayload))]
@@ -5234,33 +5234,33 @@ namespace Harp.MultiPwm
     /// Represents an operator that creates a message payload
     /// that total number of pulses to be generated in channel 0.
     /// </summary>
-    [DisplayName("PwmChannel0NumPulsesPayload")]
+    [DisplayName("PwmChannel0PulseCountPayload")]
     [Description("Creates a message payload that total number of pulses to be generated in channel 0.")]
-    public partial class CreatePwmChannel0NumPulsesPayload
+    public partial class CreatePwmChannel0PulseCountPayload
     {
         /// <summary>
         /// Gets or sets the value that total number of pulses to be generated in channel 0.
         /// </summary>
         [Description("The value that total number of pulses to be generated in channel 0.")]
-        public uint PwmChannel0NumPulses { get; set; }
+        public uint PwmChannel0PulseCount { get; set; }
 
         /// <summary>
-        /// Creates a message payload for the PwmChannel0NumPulses register.
+        /// Creates a message payload for the PwmChannel0PulseCount register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
         public uint GetPayload()
         {
-            return PwmChannel0NumPulses;
+            return PwmChannel0PulseCount;
         }
 
         /// <summary>
         /// Creates a message that total number of pulses to be generated in channel 0.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
-        /// <returns>A new message for the PwmChannel0NumPulses register.</returns>
+        /// <returns>A new message for the PwmChannel0PulseCount register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.MultiPwm.PwmChannel0NumPulses.FromPayload(messageType, GetPayload());
+            return Harp.MultiPwm.PwmChannel0PulseCount.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -5268,19 +5268,19 @@ namespace Harp.MultiPwm
     /// Represents an operator that creates a timestamped message payload
     /// that total number of pulses to be generated in channel 0.
     /// </summary>
-    [DisplayName("TimestampedPwmChannel0NumPulsesPayload")]
+    [DisplayName("TimestampedPwmChannel0PulseCountPayload")]
     [Description("Creates a timestamped message payload that total number of pulses to be generated in channel 0.")]
-    public partial class CreateTimestampedPwmChannel0NumPulsesPayload : CreatePwmChannel0NumPulsesPayload
+    public partial class CreateTimestampedPwmChannel0PulseCountPayload : CreatePwmChannel0PulseCountPayload
     {
         /// <summary>
         /// Creates a timestamped message that total number of pulses to be generated in channel 0.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
-        /// <returns>A new timestamped message for the PwmChannel0NumPulses register.</returns>
+        /// <returns>A new timestamped message for the PwmChannel0PulseCount register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.MultiPwm.PwmChannel0NumPulses.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.MultiPwm.PwmChannel0PulseCount.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -5288,33 +5288,33 @@ namespace Harp.MultiPwm
     /// Represents an operator that creates a message payload
     /// that total number of pulses to be generated in channel 1.
     /// </summary>
-    [DisplayName("PwmChannel1NumPulsesPayload")]
+    [DisplayName("PwmChannel1PulseCountPayload")]
     [Description("Creates a message payload that total number of pulses to be generated in channel 1.")]
-    public partial class CreatePwmChannel1NumPulsesPayload
+    public partial class CreatePwmChannel1PulseCountPayload
     {
         /// <summary>
         /// Gets or sets the value that total number of pulses to be generated in channel 1.
         /// </summary>
         [Description("The value that total number of pulses to be generated in channel 1.")]
-        public uint PwmChannel1NumPulses { get; set; }
+        public uint PwmChannel1PulseCount { get; set; }
 
         /// <summary>
-        /// Creates a message payload for the PwmChannel1NumPulses register.
+        /// Creates a message payload for the PwmChannel1PulseCount register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
         public uint GetPayload()
         {
-            return PwmChannel1NumPulses;
+            return PwmChannel1PulseCount;
         }
 
         /// <summary>
         /// Creates a message that total number of pulses to be generated in channel 1.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
-        /// <returns>A new message for the PwmChannel1NumPulses register.</returns>
+        /// <returns>A new message for the PwmChannel1PulseCount register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.MultiPwm.PwmChannel1NumPulses.FromPayload(messageType, GetPayload());
+            return Harp.MultiPwm.PwmChannel1PulseCount.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -5322,19 +5322,19 @@ namespace Harp.MultiPwm
     /// Represents an operator that creates a timestamped message payload
     /// that total number of pulses to be generated in channel 1.
     /// </summary>
-    [DisplayName("TimestampedPwmChannel1NumPulsesPayload")]
+    [DisplayName("TimestampedPwmChannel1PulseCountPayload")]
     [Description("Creates a timestamped message payload that total number of pulses to be generated in channel 1.")]
-    public partial class CreateTimestampedPwmChannel1NumPulsesPayload : CreatePwmChannel1NumPulsesPayload
+    public partial class CreateTimestampedPwmChannel1PulseCountPayload : CreatePwmChannel1PulseCountPayload
     {
         /// <summary>
         /// Creates a timestamped message that total number of pulses to be generated in channel 1.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
-        /// <returns>A new timestamped message for the PwmChannel1NumPulses register.</returns>
+        /// <returns>A new timestamped message for the PwmChannel1PulseCount register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.MultiPwm.PwmChannel1NumPulses.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.MultiPwm.PwmChannel1PulseCount.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -5342,33 +5342,33 @@ namespace Harp.MultiPwm
     /// Represents an operator that creates a message payload
     /// that total number of pulses to be generated in channel 2.
     /// </summary>
-    [DisplayName("PwmChannel2NumPulsesPayload")]
+    [DisplayName("PwmChannel2PulseCountPayload")]
     [Description("Creates a message payload that total number of pulses to be generated in channel 2.")]
-    public partial class CreatePwmChannel2NumPulsesPayload
+    public partial class CreatePwmChannel2PulseCountPayload
     {
         /// <summary>
         /// Gets or sets the value that total number of pulses to be generated in channel 2.
         /// </summary>
         [Description("The value that total number of pulses to be generated in channel 2.")]
-        public uint PwmChannel2NumPulses { get; set; }
+        public uint PwmChannel2PulseCount { get; set; }
 
         /// <summary>
-        /// Creates a message payload for the PwmChannel2NumPulses register.
+        /// Creates a message payload for the PwmChannel2PulseCount register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
         public uint GetPayload()
         {
-            return PwmChannel2NumPulses;
+            return PwmChannel2PulseCount;
         }
 
         /// <summary>
         /// Creates a message that total number of pulses to be generated in channel 2.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
-        /// <returns>A new message for the PwmChannel2NumPulses register.</returns>
+        /// <returns>A new message for the PwmChannel2PulseCount register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.MultiPwm.PwmChannel2NumPulses.FromPayload(messageType, GetPayload());
+            return Harp.MultiPwm.PwmChannel2PulseCount.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -5376,19 +5376,19 @@ namespace Harp.MultiPwm
     /// Represents an operator that creates a timestamped message payload
     /// that total number of pulses to be generated in channel 2.
     /// </summary>
-    [DisplayName("TimestampedPwmChannel2NumPulsesPayload")]
+    [DisplayName("TimestampedPwmChannel2PulseCountPayload")]
     [Description("Creates a timestamped message payload that total number of pulses to be generated in channel 2.")]
-    public partial class CreateTimestampedPwmChannel2NumPulsesPayload : CreatePwmChannel2NumPulsesPayload
+    public partial class CreateTimestampedPwmChannel2PulseCountPayload : CreatePwmChannel2PulseCountPayload
     {
         /// <summary>
         /// Creates a timestamped message that total number of pulses to be generated in channel 2.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
-        /// <returns>A new timestamped message for the PwmChannel2NumPulses register.</returns>
+        /// <returns>A new timestamped message for the PwmChannel2PulseCount register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.MultiPwm.PwmChannel2NumPulses.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.MultiPwm.PwmChannel2PulseCount.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -5396,33 +5396,33 @@ namespace Harp.MultiPwm
     /// Represents an operator that creates a message payload
     /// that total number of pulses to be generated in channel 3.
     /// </summary>
-    [DisplayName("PwmChannel3NumPulsesPayload")]
+    [DisplayName("PwmChannel3PulseCountPayload")]
     [Description("Creates a message payload that total number of pulses to be generated in channel 3.")]
-    public partial class CreatePwmChannel3NumPulsesPayload
+    public partial class CreatePwmChannel3PulseCountPayload
     {
         /// <summary>
         /// Gets or sets the value that total number of pulses to be generated in channel 3.
         /// </summary>
         [Description("The value that total number of pulses to be generated in channel 3.")]
-        public uint PwmChannel3NumPulses { get; set; }
+        public uint PwmChannel3PulseCount { get; set; }
 
         /// <summary>
-        /// Creates a message payload for the PwmChannel3NumPulses register.
+        /// Creates a message payload for the PwmChannel3PulseCount register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
         public uint GetPayload()
         {
-            return PwmChannel3NumPulses;
+            return PwmChannel3PulseCount;
         }
 
         /// <summary>
         /// Creates a message that total number of pulses to be generated in channel 3.
         /// </summary>
         /// <param name="messageType">Specifies the type of the created message.</param>
-        /// <returns>A new message for the PwmChannel3NumPulses register.</returns>
+        /// <returns>A new message for the PwmChannel3PulseCount register.</returns>
         public HarpMessage GetMessage(MessageType messageType)
         {
-            return Harp.MultiPwm.PwmChannel3NumPulses.FromPayload(messageType, GetPayload());
+            return Harp.MultiPwm.PwmChannel3PulseCount.FromPayload(messageType, GetPayload());
         }
     }
 
@@ -5430,19 +5430,19 @@ namespace Harp.MultiPwm
     /// Represents an operator that creates a timestamped message payload
     /// that total number of pulses to be generated in channel 3.
     /// </summary>
-    [DisplayName("TimestampedPwmChannel3NumPulsesPayload")]
+    [DisplayName("TimestampedPwmChannel3PulseCountPayload")]
     [Description("Creates a timestamped message payload that total number of pulses to be generated in channel 3.")]
-    public partial class CreateTimestampedPwmChannel3NumPulsesPayload : CreatePwmChannel3NumPulsesPayload
+    public partial class CreateTimestampedPwmChannel3PulseCountPayload : CreatePwmChannel3PulseCountPayload
     {
         /// <summary>
         /// Creates a timestamped message that total number of pulses to be generated in channel 3.
         /// </summary>
         /// <param name="timestamp">The timestamp of the message payload, in seconds.</param>
         /// <param name="messageType">Specifies the type of the created message.</param>
-        /// <returns>A new timestamped message for the PwmChannel3NumPulses register.</returns>
+        /// <returns>A new timestamped message for the PwmChannel3PulseCount register.</returns>
         public HarpMessage GetMessage(double timestamp, MessageType messageType)
         {
-            return Harp.MultiPwm.PwmChannel3NumPulses.FromPayload(timestamp, messageType, GetPayload());
+            return Harp.MultiPwm.PwmChannel3PulseCount.FromPayload(timestamp, messageType, GetPayload());
         }
     }
 
@@ -6322,13 +6322,13 @@ namespace Harp.MultiPwm
         /// Gets or sets the value that emits a start software-trigger on the channels specified in the mask.
         /// </summary>
         [Description("The value that emits a start software-trigger on the channels specified in the mask.")]
-        public TriggerInput StartSoftwareTrigger { get; set; }
+        public TriggerInputs StartSoftwareTrigger { get; set; }
 
         /// <summary>
         /// Creates a message payload for the StartSoftwareTrigger register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public TriggerInput GetPayload()
+        public TriggerInputs GetPayload()
         {
             return StartSoftwareTrigger;
         }
@@ -6376,13 +6376,13 @@ namespace Harp.MultiPwm
         /// Gets or sets the value that emits a stop software-trigger on the channels specified in the mask.
         /// </summary>
         [Description("The value that emits a stop software-trigger on the channels specified in the mask.")]
-        public TriggerInput StopSoftwareTrigger { get; set; }
+        public TriggerInputs StopSoftwareTrigger { get; set; }
 
         /// <summary>
         /// Creates a message payload for the StopSoftwareTrigger register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public TriggerInput GetPayload()
+        public TriggerInputs GetPayload()
         {
             return StopSoftwareTrigger;
         }
@@ -6907,13 +6907,13 @@ namespace Harp.MultiPwm
         /// Gets or sets the value that current state of all trigger channel inputs.
         /// </summary>
         [Description("The value that current state of all trigger channel inputs.")]
-        public TriggerInput TriggerChannelState { get; set; }
+        public TriggerInputs TriggerChannelState { get; set; }
 
         /// <summary>
         /// Creates a message payload for the TriggerChannelState register.
         /// </summary>
         /// <returns>The created message payload value.</returns>
-        public TriggerInput GetPayload()
+        public TriggerInputs GetPayload()
         {
             return TriggerChannelState;
         }
@@ -7353,7 +7353,7 @@ namespace Harp.MultiPwm
     /// Available trigger input channels.
     /// </summary>
     [Flags]
-    public enum TriggerInput : byte
+    public enum TriggerInputs : byte
     {
         None = 0x0,
         Channel0 = 0x1,
